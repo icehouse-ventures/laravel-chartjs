@@ -1,4 +1,4 @@
-# laravel-chartjs - Chart.js wrapper for Laravel
+# laravel-chartjs - A Chart.js wrapper for Laravel
 
 Simple package to facilitate and automate the use of charts in Laravel 
 using the [Chart.js](http://www.chartjs.org/) library.
@@ -8,13 +8,21 @@ using the [Chart.js](http://www.chartjs.org/) library.
 composer require icehouse-ventures/laravel-chartjs
 ```
 
-For Laravel 8 and below, add the Service Provider in your file config/app.php:
+For Laravel 8 (and below), add the Service Provider in your file config/app.php:
 ```php
-IcehouseVentures\LaravelChartJs\Providers\ChartjsServiceProvider::class
+IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider::class
+```
+
+Publishing the config file to your own application allows you to customise the package with several settings such as the Chartjs version to be used, the installation and delivery method for the Chartjs files.
+
+```
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --tag="config"
 ```
 
 Finally, you can install and add to your layouts / templates the Chartjs library that can be easily
-found for download at: http://www.chartjs.org. 
+found for download at: http://www.chartjs.org
+
+There are several installation options for Chartjs. By default, the package comes set to use the custom / self-managed delivery method (to avoid conflict with existing installations). For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chart-js.php settings, this will load the specified Chartjs files via an external content delivery network.
 
 # Usage:
 
@@ -31,32 +39,32 @@ $service = app()->chartjs
     ->options();
 ```
 
-The builder needs the name of the chart, the type of chart that can be anything that is supported by chartjs and the other custom configurations like labels, datasets, size and options.
+The builder needs the name of the chart, the type of chart that can be anything that is supported by Chartjs and the other custom configurations like labels, datasets, size and options.
 
 In the dataset interface you can pass any configuration and option to your chart.
-All options available in chartjs documentation are supported.
+All options available in Chartjs documentation are supported.
 Just write the configuration with php array notations and it works!
 
-# Advanced chartjs options
+# Advanced Chartjs options
 
-The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options like:
+The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options such as those used to do complex formatting on scales (Chartjs v3+ example):
 
 ```php
     options: {
         scales: {
-            xAxes: [{
+            x: {
                 type: 'time',
                 time: {
                     displayFormats: {
                         quarter: 'MMM YYYY'
                     }
                 }
-            }]
+            }
         }
     }
 ```
 
-Using the optionsRaw() method it's possible to add nested Chartjs options in raw format:
+Using the optionsRaw() method it's possible to add nested Chartjs options in raw format (Chartjs v2 example):
 
 Passing string format like a json
 ```php
@@ -74,7 +82,7 @@ Passing string format like a json
         }");
 ```
 
-Or, if you prefer, you can pass a php array format
+Or, if you prefer, you can pass a php array format and the package will convert it to the JSON format used by Chartjs:
 
 ```php
 $chart->optionsRaw([
@@ -206,13 +214,11 @@ return view('example', compact('chartjs'));
 </div>
 ```
 
-
-# OBS:
-
-This README, as well as the package, is in development, but will be constantly updated and I will keep you informed as soon as
-it is ready for production. Thank you for understanding.
-
-Any questions or suggestions preferably open an issue!
+# Issues
+This README, as well as the package, is in development, but will be constantly updated and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
 
 # License
 LaravelChartJs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+# Provenance
+Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa.

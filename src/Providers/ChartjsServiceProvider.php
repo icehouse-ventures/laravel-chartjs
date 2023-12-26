@@ -7,7 +7,7 @@ use IcehouseVentures\LaravelChartJs\ChartPieAndDoughnut;
 use IcehouseVentures\LaravelChartJs\ChartRadar;
 use Illuminate\Support\ServiceProvider;
 
-class ChartjsServiceProvider extends ServiceProvider
+class ChartJsServiceProvider extends ServiceProvider
 {
 
     /**
@@ -21,6 +21,11 @@ class ChartjsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
         
         $this->colours = config('chartjs.colours');
+
+        $this->publishes([
+            __DIR__.'/../../config/chart-js.php' => config_path('chart-js.php'),
+        ], 'config');
+
     }
 
 

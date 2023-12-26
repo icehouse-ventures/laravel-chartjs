@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "IcehouseVentures\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
+                "IcehouseVentures\\LaravelChartJs\\Providers\\ChartJsServiceProvider"
             ]
         }
     }
