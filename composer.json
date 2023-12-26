@@ -2,7 +2,7 @@
     "name": "icehouse-ventures/laravel-chartjs",
     "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.Js library",
     "keywords": [
-      "chartjs","laravel5","chart","reports","graphics", "IcehouseVentures"
+      "laravel", "chartjs","charts","graphs","icehouseventures"
     ],
     "license": "MIT",
     "authors": [

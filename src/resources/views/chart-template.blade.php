@@ -1,4 +1,4 @@
-@if(config('chart-js.build') == 'CDN')
+@if($delivery == 'CDN')
     @once
         @if($version == 4)
             <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>

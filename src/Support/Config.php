@@ -17,5 +17,9 @@ class Config
         return config('chart-js.version') ?? 2;
     }
     
+    public static function deliveryMethod()
+    {
+        return config('chart-js.delivery') ?? 'custom';
+    }
 
 }

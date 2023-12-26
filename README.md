@@ -1,20 +1,19 @@
-
-# laravel-chartjs - Chart.js v2 wrapper for Laravel 5.x
+# laravel-chartjs - Chart.js wrapper for Laravel
 
 Simple package to facilitate and automate the use of charts in Laravel 
 using the [Chart.js](http://www.chartjs.org/) library.
 
 # Setup:
 ```
-composer require icehouseventures/laravelchartjs
+composer require icehouse-ventures/laravel-chartjs
 ```
 
-And add the Service Provider in your file config/app.php:
+For Laravel 8 and below, add the Service Provider in your file config/app.php:
 ```php
 IcehouseVentures\LaravelChartJs\Providers\ChartjsServiceProvider::class
 ```
 
-Finally, for now, you must install and add to your layouts / templates the Chartjs library that can be easily
+Finally, you can install and add to your layouts / templates the Chartjs library that can be easily
 found for download at: http://www.chartjs.org. 
 
 # Usage:
@@ -36,11 +35,11 @@ The builder needs the name of the chart, the type of chart that can be anything 
 
 In the dataset interface you can pass any configuration and option to your chart.
 All options available in chartjs documentation are supported.
-Just write the configuration with php array notations and its work!
+Just write the configuration with php array notations and it works!
 
 # Advanced chartjs options
 
-Since the current version allows it to add simple json string based options, it is not possible to generate options like:
+The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options like:
 
 ```php
     options: {
@@ -57,7 +56,7 @@ Since the current version allows it to add simple json string based options, it 
     }
 ```
 
-Using the method optionsRaw(string) its possible to add a the options in raw format:
+Using the optionsRaw() method it's possible to add nested Chartjs options in raw format:
 
 Passing string format like a json
 ```php
@@ -213,7 +212,7 @@ return view('example', compact('chartjs'));
 This README, as well as the package, is in development, but will be constantly updated and I will keep you informed as soon as
 it is ready for production. Thank you for understanding.
 
-Any questions or suggestions preferably open a issue!
+Any questions or suggestions preferably open an issue!
 
 # License
 LaravelChartJs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

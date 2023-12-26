@@ -44,6 +44,8 @@ class Builder
 
         $this->version = Config::chartJsVersion();
 
+        $this->delivery = Config::deliveryMethod();
+
         $this->types = Config::allowedChartTypes($this->version);
     }
 
@@ -158,7 +160,8 @@ class Builder
                 ->with('optionsRaw', $optionsRaw)
                 ->with('type', $chart['type'])
                 ->with('size', $chart['size'])
-                ->with('version', $this->version);
+                ->with('version', $this->version)
+                ->with('delivery', $this->delivery);
     }
 
     /**
