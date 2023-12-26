@@ -1,12 +1,13 @@
 <?php
 
 /*
- * This file is inspired by Builder from Laravel ChartJS - Brian Faust
+ * This file is inspired by Builder from Laravel ChartJS - Brian Faust and Laravel ChartJS - Felix Costa
  */
 
-namespace Fx3costa\LaravelChartJs;
+namespace IcehouseVentures\LaravelChartJs;
 
 use Illuminate\Support\Arr;
+use IcehouseVentures\LaravelChartJs\Support\Config;
 
 class Builder
 {
@@ -23,28 +24,28 @@ class Builder
     /**
      * @var array
      */
-    private $defaults = [
-        'datasets' => [],
-        'labels'   => [],
-        'type'     => 'line',
-        'options'  => [],
-        'size'     => ['width' => null, 'height' => null]
-    ];
+    private $defaults;
 
     /**
      * @var array
      */
-    private $types = [
-        'bar',
-        'horizontalBar',
-        'bubble',
-        'scatter',
-        'doughnut',
-        'line',
-        'pie',
-        'polarArea',
-        'radar'
-    ];
+    private $types;
+
+    public function __construct()
+    {
+        $this->defaults = [
+            'datasets' => [],
+            'labels'   => [],
+            'type'     => 'line',
+            'options'  => [],
+            'size'     => ['width' => null, 'height' => null],
+            'plugins'  => []
+        ];
+
+        $this->version = Config::chartJsVersion();
+
+        $this->types = Config::allowedChartTypes($this->version);
+    }
 
     /**
      * @param $name
@@ -53,7 +54,7 @@ class Builder
      */
     public function name($name)
     {
-        $this->name          = $name;
+        $this->name = $name;
         $this->charts[$name] = $this->defaults;
         return $this;
     }
@@ -147,15 +148,17 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
+        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';
 
         return view('chart-template::chart-template')
                 ->with('datasets', $chart['datasets'])
                 ->with('element', $this->name)
                 ->with('labels', $chart['labels'])
                 ->with('options', isset($chart['options']) ? $chart['options'] : '')
-                ->with('optionsRaw', isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '')
+                ->with('optionsRaw', $optionsRaw)
                 ->with('type', $chart['type'])
-                ->with('size', $chart['size']);
+                ->with('size', $chart['size'])
+                ->with('version', $this->version);
     }
 
     /**

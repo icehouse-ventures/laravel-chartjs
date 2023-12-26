@@ -1,10 +1,10 @@
-<?php namespace Fx3costa\LaravelChartJs\Providers;
+<?php namespace IcehouseVentures\LaravelChartJs\Providers;
 
-use Fx3costa\LaravelChartJs\Builder;
-use Fx3costa\LaravelChartJs\ChartBar;
-use Fx3costa\LaravelChartJs\ChartLine;
-use Fx3costa\LaravelChartJs\ChartPieAndDoughnut;
-use Fx3costa\LaravelChartJs\ChartRadar;
+use IcehouseVentures\LaravelChartJs\Builder;
+use IcehouseVentures\LaravelChartJs\ChartBar;
+use IcehouseVentures\LaravelChartJs\ChartLine;
+use IcehouseVentures\LaravelChartJs\ChartPieAndDoughnut;
+use IcehouseVentures\LaravelChartJs\ChartRadar;
 use Illuminate\Support\ServiceProvider;
 
 class ChartjsServiceProvider extends ServiceProvider
@@ -19,6 +19,7 @@ class ChartjsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
+        
         $this->colours = config('chartjs.colours');
     }
 

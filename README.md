@@ -1,23 +1,21 @@
 
 # laravel-chartjs - Chart.js v2 wrapper for Laravel 5.x
 
-*No Longer Maintained*. This lib is basically a bridge to Chartjs so it is very likely that some problem or issue is better resolved in the Chartjs repository itself.
-
-Simple package to facilitate and automate the use of charts in Laravel 5.x
-using the [Chart.js](http://www.chartjs.org/) v2 library from Nick Downie.
+Simple package to facilitate and automate the use of charts in Laravel 
+using the [Chart.js](http://www.chartjs.org/) library.
 
 # Setup:
 ```
-composer require fx3costa/laravelchartjs
+composer require icehouseventures/laravelchartjs
 ```
 
 And add the Service Provider in your file config/app.php:
 ```php
-Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class
+IcehouseVentures\LaravelChartJs\Providers\ChartjsServiceProvider::class
 ```
 
 Finally, for now, you must install and add to your layouts / templates the Chartjs library that can be easily
-found for download at: http://www.chartjs.org. This setting will also be improved.
+found for download at: http://www.chartjs.org. 
 
 # Usage:
 
@@ -34,7 +32,7 @@ $service = app()->chartjs
     ->options();
 ```
 
-For now the builder needs the name of the chart, the type of chart that can be anything that is supported by chartjs and the other custom configurations like labels, datasets, size and options.
+The builder needs the name of the chart, the type of chart that can be anything that is supported by chartjs and the other custom configurations like labels, datasets, size and options.
 
 In the dataset interface you can pass any configuration and option to your chart.
 All options available in chartjs documentation are supported.

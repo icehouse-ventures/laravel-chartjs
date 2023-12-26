@@ -1,14 +1,14 @@
 {
-    "name": "fx3costa/laravelchartjs",
-    "description": "Simple package to facilitate and automate the use of charts in Laravel 5.x using Chartjs v2 library",
+    "name": "icehouse-ventures/laravel-chartjs",
+    "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.Js library",
     "keywords": [
-      "chartjs","laravel5","chart","reports","graphics", "fx3costa"
+      "chartjs","laravel5","chart","reports","graphics", "IcehouseVentures"
     ],
     "license": "MIT",
     "authors": [
         {
-            "name": "Felix",
-            "email": "fx3costa@gmail.com"
+            "name": "Icehouse Ventures",
+            "email": "tech@icehouseventures.co.nz"
         }
     ],
     "require": {
@@ -18,14 +18,14 @@
 
     "autoload": {
       "psr-4": {
-        "Fx3costa\\LaravelChartJs\\" : "src/"
+        "IcehouseVentures\\LaravelChartJs\\" : "src/"
       }
     },
     
     "extra": {
         "laravel": {
             "providers": [
-                "Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
+                "IcehouseVentures\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
             ]
         }
     }
