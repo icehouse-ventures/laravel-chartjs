@@ -1,27 +1,39 @@
-@if($delivery == 'CDN')
-    @once
+@once
+    @if($delivery == 'CDN')
+            @if($version == 4)
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
+                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            @elseif($version == 3)
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            @else
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@^2"></script>
+                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            @endif
+    @elseif($delivery == 'publish')
         @if($version == 4)
-            <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
-            <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
-            <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            <script type="module" src="{{ asset('vendor/laravelchartjs/chart.js') }}"></script>
         @elseif($version == 3)
-            <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
-            <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
-            <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            <script src="{{ asset('vendor/laravelchartjs/chart3.js') }}"></script>
         @else
-            <script src="https://cdn.jsdelivr.net/npm/chart.js@^2"></script>
-            <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-            <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
-            <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
+            <script src="{{ asset('vendor/laravelchartjs/chart2.bundle.js') }}"></script>
         @endif
-    @endonce
-@elseif($delivery == 'binary')
-
-    <script type="module" src="{{ asset('vendor/laravelchartjs/chart.js') }}"></script>
-
-@endif
+    @elseif($delivery == 'binary')
+        @if($version == 4)
+            <script>{!! $chartJsScriptv4 !!}</script>
+        @elseif($version == 3)
+            <script>{!! $chartJsScriptv3 !!}</script>
+        @else
+            <script>{!! $chartJsScriptv2 !!}</script>
+        @endif
+    @endif
+@endonce
 
 
 <canvas id="{!! $element !!}" width="{!! $size['width'] !!}" height="{!! $size['height'] !!}">

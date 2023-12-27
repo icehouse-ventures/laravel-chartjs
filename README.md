@@ -29,16 +29,28 @@ found for download at: http://www.chartjs.org
 There are several installation options for Chartjs. By default, the package comes set to use the custom / self-managed delivery method (to avoid conflict with existing installations). 
 
 ## CDN
-For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chart-js.php settings, this will load the specified Chartjs files via an external content delivery network.
+For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chart-js.php settings, this will load the specified Chartjs files via an external content delivery network. Chartjs versions 2, 3 and 4 are available by CDN. These also load Moment.js and Numeral.js which are commonly needed for business charts.
+
+## Publish
+If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes pre-compiled versions of Chartjs that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets:
+
+```
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets"
+```
+By default the publish method will install Chartjs version 4 using the latest binary in the package. If you want to publish an older version, we have also included the latest stable Chartjs releases for version 3 and version 2. You can publish these to your public assets folder using the following commands: 
+
+```
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets-v3"
+```
+Or publish Chartjs version 2:
+```
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets-v2"
+```
 
 ## Binary
-If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes a pre-compiled binary file of Chartjs (currently version 4) that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets:
+In some rare circumstances such as local development without an internet connection, private applications, shared servers or where you cannot access the public folder on your server, then you may wish to have end-users directly load the binary files. This method is not recommended because it streams the contents of the files from inside your application. This delivery method will load the Chartjs files normally published to your assets folder directly from inside your vendor folder. To use this method, set the delivery config variable to 'binary' and choose the Chartjs version you wish to use in the config file. 
 
-```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --tag="assets"
-```
-
-## NPM
+## NPM (Recommended)
 The recommended method to install Chartjs in a web applcation is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/
 
 # Usage:
@@ -64,7 +76,7 @@ Just write the configuration with php array notations and it works!
 
 # Advanced Chartjs options
 
-The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options such as those used to do complex formatting on scales (Chartjs v3+ example):
+The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options such as those used to do complex formatting on scales (Chartjs v3 example):
 
 ```php
     options: {
@@ -238,4 +250,4 @@ This README, as well as the package, is in development, but will be constantly u
 LaravelChartJs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 # Provenance
-Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa.
+Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa. In 2024 the package was adopted by Icehouse Ventures which is an early-stage venture capital firm based in New Zealand. We use Chartjs heavily in our Laravel applications and want to give back to the Laravel community by making Chartjs fast and easy to implement across all major versions and to streamline the upgrade path.
