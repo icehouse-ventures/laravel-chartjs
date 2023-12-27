@@ -17,7 +17,12 @@
             <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
         @endif
     @endonce
+@elseif($delivery == 'binary')
+
+    <script type="module" src="{{ asset('vendor/laravelchartjs/chart.js') }}"></script>
+
 @endif
+
 
 <canvas id="{!! $element !!}" width="{!! $size['width'] !!}" height="{!! $size['height'] !!}">
 <script>

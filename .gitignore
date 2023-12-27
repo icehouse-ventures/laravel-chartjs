@@ -1,0 +1,7 @@
+/.idea
+/vendor
+/node_modules
+/phpunit.xml
+.phpunit.result.cache
+.env
+.idea

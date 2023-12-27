@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch"
+    },
+  "devDependencies": {
+    "chart.js": "^4.4.1",
+    "vite": "^4.0.3"
+
+  }
+}

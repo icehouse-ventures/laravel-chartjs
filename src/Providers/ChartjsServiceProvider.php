@@ -26,6 +26,10 @@ class ChartJsServiceProvider extends ServiceProvider
             __DIR__.'/../../config/chart-js.php' => config_path('chart-js.php'),
         ], 'config');
 
+        $this->publishes([
+            __DIR__.'/../../dist' => public_path('vendor/laravelchartjs'),
+           ], 'assets');
+
     }
 
 
