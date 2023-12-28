@@ -18,7 +18,7 @@ class Config
     {
         return config('chartjs.version', 2);
     }
-    
+
     public static function deliveryMethod()
     {
         return config('chartjs.delivery', 'CDN');
@@ -49,5 +49,4 @@ class Config
 
         return 'chart-template::chart-template';
     }
-
 }

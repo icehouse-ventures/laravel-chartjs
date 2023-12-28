@@ -1,15 +1,13 @@
 <?php
 
 use IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider;
-use IcehouseVentures\LaravelChartjs\Tests\TestCase;
 use Illuminate\Support\Facades\File;
-use Illuminate\Container\Container;
 
 it('registers the package provider', function () {
 
     // Assert that the application instance exists
     $this->assertNotNull(app());
-    
+
     // Assert that the package provider class exists
     $this->assertTrue(class_exists(ChartjsServiceProvider::class));
 
@@ -53,4 +51,3 @@ it('publishes views', function () {
     // Assert that the views have been published
     $this->assertFileExists(resource_path('views/vendor/laravelchartjs/custom-chart-template.blade.php'));
 });
-

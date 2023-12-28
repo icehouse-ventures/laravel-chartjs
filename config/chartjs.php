@@ -28,7 +28,7 @@ return [
     | script to publish the assets. We recommend delivery via a JavaScript NPM
     | build pipeline such as Laravel Mix, Yarn, Webpack or Vite. The custom
     | option is self-managed and designed to not interfere with your
-    | existing delivery method for example when migrating 
+    | existing delivery method for example when migrating
     | from another package.
     |
     | Available choices are 'CDN', 'publish', 'binary', 'npm' and 'custom'.
@@ -43,7 +43,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Plugins are an important part of extending the Chartjs core functionality
-    | we include some common plugins in the pre-configured CDN and binary 
+    | we include some common plugins in the pre-configured CDN and binary
     | build setup. These packages can be controlled below
     |
     | Available choices are true and false.
@@ -72,4 +72,3 @@ return [
     'custom_view' => false,
 
 ];
-

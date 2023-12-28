@@ -2,8 +2,8 @@
 
 namespace IcehouseVentures\LaravelChartjs\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
@@ -18,9 +18,9 @@ class TestCase extends Orchestra
     {
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
 
         // Set other environment variables

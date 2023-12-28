@@ -35,11 +35,11 @@ class Builder
     {
         $this->defaults = [
             'datasets' => [],
-            'labels'   => [],
-            'type'     => 'line',
-            'options'  => [],
-            'size'     => ['width' => null, 'height' => null],
-            'plugins'  => []
+            'labels' => [],
+            'type' => 'line',
+            'options' => [],
+            'size' => ['width' => null, 'height' => null],
+            'plugins' => [],
         ];
 
         $this->version = Config::chartJsVersion();
@@ -54,8 +54,6 @@ class Builder
     }
 
     /**
-     * @param $name
-     *
      * @return $this|Builder
      */
     public function name($name)
@@ -66,8 +64,6 @@ class Builder
     }
 
     /**
-     * @param $element
-     *
      * @return Builder
      */
     public function element($element)
@@ -76,8 +72,6 @@ class Builder
     }
 
     /**
-     * @param array $labels
-     *
      * @return Builder
      */
     public function labels(array $labels)
@@ -86,8 +80,6 @@ class Builder
     }
 
     /**
-     * @param array $datasets
-     *
      * @return Builder
      */
     public function datasets(array $datasets)
@@ -96,8 +88,6 @@ class Builder
     }
 
     /**
-     * @param $type
-     *
      * @return Builder
      */
     public function type($type)
@@ -109,8 +99,7 @@ class Builder
     }
 
     /**
-     * @param array $size
-     *
+     * @param  array  $size
      * @return Builder
      */
     public function size($size)
@@ -119,8 +108,6 @@ class Builder
     }
 
     /**
-     * @param array $options
-     *
      * @return $this|Builder
      */
     public function options(array $options)
@@ -133,8 +120,7 @@ class Builder
     }
 
     /**
-     *
-     * @param string|array $optionsRaw
+     * @param  string|array  $optionsRaw
      * @return \self
      */
     public function optionsRaw($optionsRaw)
@@ -154,26 +140,24 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $view = $this->useCustomView ?  $this->chartViewName : 'chart-template::chart-template';
-        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';        
+        $view = $this->useCustomView ? $this->chartViewName : 'chart-template::chart-template';
+        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';
         $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : '';
-        $options =  $optionsRaw ? $optionsRaw : $optionsSimple;
+        $options = $optionsRaw ? $optionsRaw : $optionsSimple;
 
         return view($view)->with([
-                    'datasets' => json_encode($chart['datasets']),
-                    'element' => $this->name,
-                    'labels' => json_encode($chart['labels']),
-                    'options' => $options,
-                    'type' => $chart['type'],
-                    'size' => $chart['size'],
-                    'version' => $this->version,
-                    'delivery' => $this->delivery
-                ]);
+            'datasets' => json_encode($chart['datasets']),
+            'element' => $this->name,
+            'labels' => json_encode($chart['labels']),
+            'options' => $options,
+            'type' => $chart['type'],
+            'size' => $chart['size'],
+            'version' => $this->version,
+            'delivery' => $this->delivery,
+        ]);
     }
 
     /**
-     * @param $key
-     *
      * @return mixed
      */
     private function get($key)
@@ -182,9 +166,6 @@ class Builder
     }
 
     /**
-     * @param $key
-     * @param $value
-     *
      * @return $this|Builder
      */
     public function set($key, $value)

@@ -1,16 +1,15 @@
-<?php namespace IcehouseVentures\LaravelChartjs\Providers;
+<?php
+
+namespace IcehouseVentures\LaravelChartjs\Providers;
 
 use IcehouseVentures\LaravelChartjs\Builder;
-use IcehouseVentures\LaravelChartjs\ChartBar;
-use IcehouseVentures\LaravelChartjs\ChartLine;
-use IcehouseVentures\LaravelChartjs\ChartPieAndDoughnut;
-use IcehouseVentures\LaravelChartjs\ChartRadar;
 use Illuminate\Support\ServiceProvider;
 
 class ChartjsServiceProvider extends ServiceProvider
 {
     /**
      * Array with colours configuration of the chartjs config file
+     *
      * @var array
      */
     protected $colours = [];
@@ -18,7 +17,7 @@ class ChartjsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
-        
+
         $this->colours = config('chartjs.colours');
 
         // Installation and setup
@@ -33,32 +32,31 @@ class ChartjsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../../dist/chart.js' => public_path('vendor/laravelchartjs/chart.js'),
-           ], 'assets');
+        ], 'assets');
 
         $this->publishes([
             __DIR__.'/../../dist/chart3.js' => public_path('vendor/laravelchartjs/chart3.js'),
-           ], 'assets-v3');
+        ], 'assets-v3');
 
         $this->publishes([
             __DIR__.'/../../dist/chart2.bundle.js' => public_path('vendor/laravelchartjs/chart2.bundle.js'),
-           ], 'assets-v2');
+        ], 'assets-v2');
 
         // Delivery and view injection
 
         if(config('chart-js.delivery') == 'binary'){
-            if(config('chart-js.version') == 4)
+            if(config('chart-js.version') == 4) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
-                });
-            if(config('chart-js.version') == 3)
+                }); }
+            if(config('chart-js.version') == 3) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart3.js')));
-                });
-            else{
-                view()->composer('chart-template::chart-template', function ($view) {
-                    $view->with('chartJsScriptv2', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart2.bundle.js')));
-                });
-            }
+                }); } else{
+                    view()->composer('chart-template::chart-template', function ($view) {
+                        $view->with('chartJsScriptv2', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart2.bundle.js')));
+                    });
+                }
         }
     }
 
@@ -69,7 +67,7 @@ class ChartjsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('chartjs', function() {
+        $this->app->bind('chartjs', function () {
             return new Builder();
         });
     }

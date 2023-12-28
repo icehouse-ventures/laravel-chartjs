@@ -1,0 +1,21 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "simplified_null_return": false,
+        "concat_space": false,
+        "not_operator_with_successor_space": false,
+        "curly_braces_position": {
+            "allow_single_line_empty_anonymous_classes" : true,
+            "allow_single_line_anonymous_functions" : true
+        },
+        "ordered_traits": false,
+        "ordered_interfaces": false,
+        "no_extra_blank_lines" : false,
+        "blank_line_before_statement": false,
+        "braces_position" : false,
+        "curly_braces_position" : false,
+        "single_space_around_construct" : false,
+        "space_after_semicolon": false
+    }
+    
+}
