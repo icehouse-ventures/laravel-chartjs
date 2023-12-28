@@ -22,9 +22,15 @@ class ChartJsServiceProvider extends ServiceProvider
         
         $this->colours = config('chartjs.colours');
 
+        // Installation and setup
+
         $this->publishes([
             __DIR__.'/../../config/chart-js.php' => config_path('chart-js.php'),
         ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/chart-template.blade.php' => resource_path('views/vendor/laravelchartjs/custom-chart-template.blade.php'),
+        ], 'views');
 
         $this->publishes([
             __DIR__.'/../../dist/chart.js' => public_path('vendor/laravelchartjs/chart.js'),
@@ -37,6 +43,8 @@ class ChartJsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../dist/chart2.bundle.js' => public_path('vendor/laravelchartjs/chart2.bundle.js'),
            ], 'assets-v2');
+
+        // Delivery and view injection
 
         if(config('chart-js.delivery') == 'binary'){
             if(config('chart-js.version') == 4)

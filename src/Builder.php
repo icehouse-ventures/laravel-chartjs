@@ -46,7 +46,11 @@ class Builder
 
         $this->delivery = Config::deliveryMethod();
 
-        $this->types = Config::allowedChartTypes($this->version);
+        $this->types = Config::allowedChartTypes();
+
+        $this->useCustomView = Config::useCustomView();
+
+        $this->chartViewName = Config::getChartViewName();
     }
 
     /**
@@ -151,8 +155,9 @@ class Builder
     {
         $chart = $this->charts[$this->name];
         $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';
-
-        return view('chart-template::chart-template')
+        $viewName = $this->useCustomView ?  $this->chartViewName : 'chart-template::chart-template';
+        
+        return view($viewName)
                 ->with('datasets', $chart['datasets'])
                 ->with('element', $this->name)
                 ->with('labels', $chart['labels'])

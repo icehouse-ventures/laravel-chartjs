@@ -243,6 +243,15 @@ return view('example', compact('chartjs'));
 </div>
 ```
 
+# Advanced custom views
+If you want to customise the appearance of all charts in your application (for example tweaking the mobile responsive css settings), then it is recommended to create a standard blade component and insert the {!! $chartjs->render() !!} reference inside your custom component (be sure to pass down the variable from your controller to your component). If for some reason need to edit the core blade template (for example to adjust the CDN logic or make deeper CSS changes to the canvas styling), then you can publish the blade template to your resources\vendor\laravelchartjs folder and edit the custom-chart-template.blade.php 
+
+To activate the custom blade template changes you can set the config option 'custom_view' to true.
+
+```
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --tag="views" --force
+```
+
 # Issues
 This README, as well as the package, is in development, but will be constantly updated and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
 
