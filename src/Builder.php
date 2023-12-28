@@ -6,20 +6,20 @@
 
 namespace IcehouseVentures\LaravelChartjs;
 
-use Illuminate\Support\Arr;
 use IcehouseVentures\LaravelChartjs\Support\Config;
+use Illuminate\Support\Arr;
 
 class Builder
 {
     /**
      * @var array
      */
-    private $charts = [];
+    public $charts = [];
 
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * @var array
@@ -187,7 +187,7 @@ class Builder
      *
      * @return $this|Builder
      */
-    private function set($key, $value)
+    public function set($key, $value)
     {
         Arr::set($this->charts[$this->name], $key, $value);
 
