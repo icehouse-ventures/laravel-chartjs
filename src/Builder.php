@@ -131,6 +131,7 @@ class Builder
         }
 
         $this->set('optionsRaw', $optionsRaw);
+
         return $this;
     }
 
@@ -160,7 +161,7 @@ class Builder
     /**
      * @return mixed
      */
-    private function get($key)
+    public function get($key)
     {
         return Arr::get($this->charts[$this->name], $key);
     }

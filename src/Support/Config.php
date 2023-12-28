@@ -8,7 +8,7 @@ class Config
 {
     public static function allowedChartTypes()
     {
-        if(self::chartJsVersion() > 3){
+        if(self::chartJsVersion() > 3) {
             return ['bar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
         }
         return ['bar', 'horizontalBar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
@@ -26,13 +26,13 @@ class Config
 
     public static function useCustomView()
     {
-        if(!config('chartjs.custom_view')){
+        if(!config('chartjs.custom_view')) {
             return false;
         }
-        if(config('chartjs.custom_view') === 'false'){
+        if(config('chartjs.custom_view') === 'false') {
             return false;
         }
-        if(config('chartjs.custom_view')){
+        if(config('chartjs.custom_view')) {
             return true;
         }
         return false;

@@ -16,7 +16,6 @@ it('registers the package provider', function () {
 
     // Assert that the package provider is loaded
     $this->assertInstanceOf(ChartjsServiceProvider::class, app()->getProvider(ChartjsServiceProvider::class));
-
 });
 
 it('publishes assets', function () {

@@ -13,7 +13,6 @@
         "no_extra_blank_lines" : false,
         "blank_line_before_statement": false,
         "braces_position" : false,
-        "curly_braces_position" : false,
         "single_space_around_construct" : false,
         "space_after_semicolon": false
     }

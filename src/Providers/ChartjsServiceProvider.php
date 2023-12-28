@@ -44,19 +44,21 @@ class ChartjsServiceProvider extends ServiceProvider
 
         // Delivery and view injection
 
-        if(config('chart-js.delivery') == 'binary'){
+        if(config('chart-js.delivery') == 'binary') {
             if(config('chart-js.version') == 4) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
-                }); }
+                });
+            }
             if(config('chart-js.version') == 3) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart3.js')));
-                }); } else{
-                    view()->composer('chart-template::chart-template', function ($view) {
-                        $view->with('chartJsScriptv2', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart2.bundle.js')));
-                    });
-                }
+                });
+            } else {
+                view()->composer('chart-template::chart-template', function ($view) {
+                    $view->with('chartJsScriptv2', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart2.bundle.js')));
+                });
+            }
         }
     }
 
