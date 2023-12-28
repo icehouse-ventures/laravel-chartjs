@@ -1,13 +1,13 @@
 <?php
 
 /*
- * This file is inspired by Builder from Laravel ChartJS - Brian Faust and Laravel ChartJS - Felix Costa
+ * This file is inspired by Builder from Laravel Chartjs - Brian Faust and Laravel Chartjs - Felix Costa
  */
 
-namespace IcehouseVentures\LaravelChartJs;
+namespace IcehouseVentures\LaravelChartjs;
 
 use Illuminate\Support\Arr;
-use IcehouseVentures\LaravelChartJs\Support\Config;
+use IcehouseVentures\LaravelChartjs\Support\Config;
 
 class Builder
 {
@@ -154,19 +154,21 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';
-        $viewName = $this->useCustomView ?  $this->chartViewName : 'chart-template::chart-template';
-        
-        return view($viewName)
-                ->with('datasets', $chart['datasets'])
-                ->with('element', $this->name)
-                ->with('labels', $chart['labels'])
-                ->with('options', isset($chart['options']) ? $chart['options'] : '')
-                ->with('optionsRaw', $optionsRaw)
-                ->with('type', $chart['type'])
-                ->with('size', $chart['size'])
-                ->with('version', $this->version)
-                ->with('delivery', $this->delivery);
+        $view = $this->useCustomView ?  $this->chartViewName : 'chart-template::chart-template';
+        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';        
+        $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : '';
+        $options =  $optionsRaw ? $optionsRaw : $optionsSimple;
+
+        return view($view)->with([
+                    'datasets' => json_encode($chart['datasets']),
+                    'element' => $this->name,
+                    'labels' => json_encode($chart['labels']),
+                    'options' => $options,
+                    'type' => $chart['type'],
+                    'size' => $chart['size'],
+                    'version' => $this->version,
+                    'delivery' => $this->delivery
+                ]);
     }
 
     /**

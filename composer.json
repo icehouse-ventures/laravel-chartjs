@@ -1,6 +1,6 @@
 {
     "name": "icehouse-ventures/laravel-chartjs",
-    "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.Js library",
+    "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.js library",
     "keywords": [
       "laravel", "chartjs","charts","graphs","icehouseventures"
     ],
@@ -18,14 +18,14 @@
 
     "autoload": {
       "psr-4": {
-        "IcehouseVentures\\LaravelChartJs\\" : "src/"
+        "IcehouseVentures\\LaravelChartjs\\" : "src/"
       }
     },
     
     "extra": {
         "laravel": {
             "providers": [
-                "IcehouseVentures\\LaravelChartJs\\Providers\\ChartJsServiceProvider"
+                "IcehouseVentures\\LaravelChartjs\\Providers\\ChartjsServiceProvider"
             ]
         }
     }

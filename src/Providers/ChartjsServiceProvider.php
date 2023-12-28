@@ -1,14 +1,13 @@
-<?php namespace IcehouseVentures\LaravelChartJs\Providers;
+<?php namespace IcehouseVentures\LaravelChartjs\Providers;
 
-use IcehouseVentures\LaravelChartJs\Builder;
-use IcehouseVentures\LaravelChartJs\ChartBar;
-use IcehouseVentures\LaravelChartJs\ChartLine;
-use IcehouseVentures\LaravelChartJs\ChartPieAndDoughnut;
-use IcehouseVentures\LaravelChartJs\ChartRadar;
-use IcehouseVentures\LaravelChartJs\Support\Config;
+use IcehouseVentures\LaravelChartjs\Builder;
+use IcehouseVentures\LaravelChartjs\ChartBar;
+use IcehouseVentures\LaravelChartjs\ChartLine;
+use IcehouseVentures\LaravelChartjs\ChartPieAndDoughnut;
+use IcehouseVentures\LaravelChartjs\ChartRadar;
 use Illuminate\Support\ServiceProvider;
 
-class ChartJsServiceProvider extends ServiceProvider
+class ChartjsServiceProvider extends ServiceProvider
 {
     /**
      * Array with colours configuration of the chartjs config file
@@ -25,7 +24,7 @@ class ChartJsServiceProvider extends ServiceProvider
         // Installation and setup
 
         $this->publishes([
-            __DIR__.'/../../config/chart-js.php' => config_path('chart-js.php'),
+            __DIR__.'/../../config/chartjs.php' => config_path('chartjs.php'),
         ], 'config');
 
         $this->publishes([

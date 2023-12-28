@@ -13,13 +13,13 @@ composer require icehouse-ventures/laravel-chartjs
 
 For Laravel 8 (and below), add the Service Provider in your file config/app.php:
 ```php
-IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider::class
+IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider::class
 ```
 
 Publishing the config file to your own application allows you to customise the package with several settings such as the Chartjs version to be used, the installation and delivery method for the Chartjs files.
 
 ```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --tag="config"
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="config"
 ```
 
 ## 2. Installing Chartjs
@@ -35,23 +35,23 @@ For rapid development and testing between versions, you can easily set the deliv
 If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes pre-compiled versions of Chartjs that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets:
 
 ```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets"
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets"
 ```
-By default the publish method will install Chartjs version 4 using the latest binary in the package. If you want to publish an older version, we have also included the latest stable Chartjs releases for version 3 and version 2. You can publish these to your public assets folder using the following commands: 
+By default, the publish method will install Chartjs version 4 using the latest binary in the package. If you want to publish an older version, we have also included the latest stable Chartjs releases for version 3 and version 2. You can publish these to your public assets folder using the following commands: 
 
 ```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets-v3"
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets-v3"
 ```
 Or publish Chartjs version 2:
 ```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --force --tag="assets-v2"
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets-v2"
 ```
 
 ## Binary
 In some rare circumstances such as local development without an internet connection, private applications, shared servers or where you cannot access the public folder on your server, then you may wish to have end-users directly load the binary files. This method is not recommended because it streams the contents of the files from inside your application. This delivery method will load the Chartjs files normally published to your assets folder directly from inside your vendor folder. To use this method, set the delivery config variable to 'binary' and choose the Chartjs version you wish to use in the config file. 
 
 ## NPM (Recommended)
-The recommended method to install Chartjs in a web applcation is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/
+The recommended method to install Chartjs in a web application is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/
 
 # Usage:
 
@@ -249,14 +249,14 @@ If you want to customise the appearance of all charts in your application (for e
 To activate the custom blade template changes you can set the config option 'custom_view' to true.
 
 ```
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartJs\Providers\ChartJsServiceProvider" --tag="views" --force
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="views" --force
 ```
 
 # Issues
-This README, as well as the package, is in development, but will be constantly updated and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
+This README, as well as the package, is in development, but will be constantly updated, and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
 
 # License
-LaravelChartJs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+LaravelChartjs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 # Provenance
 Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa. In 2024 the package was adopted by Icehouse Ventures which is an early-stage venture capital firm based in New Zealand. We use Chartjs heavily in our Laravel applications and want to give back to the Laravel community by making Chartjs fast and easy to implement across all major versions and to streamline the upgrade path.

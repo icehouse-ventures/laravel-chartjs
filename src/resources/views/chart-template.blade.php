@@ -35,7 +35,6 @@
     @endif
 @endonce
 
-
 <canvas id="{!! $element !!}" width="{!! $size['width'] !!}" height="{!! $size['height'] !!}">
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -45,14 +44,10 @@
             window.{!! $element !!} = new Chart(ctx, {
                 type: '{!! $type !!}',
                 data: {
-                    labels: {!! json_encode($labels) !!},
-                    datasets: {!! json_encode($datasets) !!}
+                    labels: {!! $labels !!},
+                    datasets: {!! $datasets !!}
                 },
-                @if(!empty($optionsRaw))
-                    options: {!! $optionsRaw !!}
-                @elseif(!empty($options))
-                    options: {!! json_encode($options) !!}
-                @endif
+                options: {!! $options !!}
             });
         })();
     });
