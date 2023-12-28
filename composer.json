@@ -18,7 +18,9 @@
 
     "autoload": {
       "psr-4": {
-        "IcehouseVentures\\LaravelChartjs\\" : "src/"
+        "IcehouseVentures\\LaravelChartjs\\" : "src/",
+        "IcehouseVentures\\LaravelChartjs\\Tests\\": "tests/"
+
       }
     },
     
@@ -27,6 +29,18 @@
             "providers": [
                 "IcehouseVentures\\LaravelChartjs\\Providers\\ChartjsServiceProvider"
             ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.19",
+        "pestphp/pest": "^2.30",
+        "laravel/pint": "^1.13",
+        "phpstan/phpstan": "^1.10",
+        "pestphp/pest-plugin-laravel": "^2.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
