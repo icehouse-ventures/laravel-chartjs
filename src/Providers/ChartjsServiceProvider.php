@@ -44,13 +44,13 @@ class ChartjsServiceProvider extends ServiceProvider
 
         // Delivery and view injection
 
-        if(config('chart-js.delivery') == 'binary') {
-            if(config('chart-js.version') == 4) {
+        if(config('chartjs.delivery') == 'binary') {
+            if(config('chartjs.version') == 4) {
                 view()->composer('chart-template::chart-template', function ($view) {
-                    $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
+                    $view->with('chartJsScriptv4', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
                 });
             }
-            if(config('chart-js.version') == 3) {
+            if(config('chartjs.version') == 3) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart3.js')));
                 });

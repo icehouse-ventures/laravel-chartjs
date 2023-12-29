@@ -11,25 +11,24 @@ This package provides a wrapper for Chartjs that allows it to be used simply and
 composer require icehouse-ventures/laravel-chartjs
 ```
 
-For Laravel 8 (and below), add the Service Provider in your file config/app.php:
+For older versions of Laravel (8 and below), add the Service Provider in your file config/app.php:
 ```php
 IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider::class
 ```
 
-Publishing the config file to your own application allows you to customise the package with several settings such as the Chartjs version to be used, the installation and delivery method for the Chartjs files.
+Publishing the config file to your own application will allow you to customise the package with several settings such as the Chartjs version to be used and the delivery method for the Chartjs files.
 
 ```
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="config"
 ```
 
 ## 2. Installing Chartjs
-Finally, you can install and add to your layouts / templates the Chartjs library that can be easily
-found for download at: http://www.chartjs.org
+Next, you can install and add to your layouts / templates the Chartjs library that can be easily found for download at: http://www.chartjs.org
 
-There are several installation options for Chartjs. By default, the package comes set to use the custom / self-managed delivery method (to avoid conflict with existing installations). 
+There are several installation options for Chartjs. By default, this package comes set to use the 'custom' self-managed delivery method (to avoid conflict with existing installations). You can also select from several other delivery methods:
 
 ## CDN
-For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chart-js.php settings, this will load the specified Chartjs files via an external content delivery network. Chartjs versions 2, 3 and 4 are available by CDN. These also load Moment.js and Numeral.js which are commonly needed for business charts.
+For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chartjs.php settings, this will load the specified Chartjs files via an external content delivery network. Chartjs versions 2, 3 and 4 are available by CDN. These also load Moment.js and Numeral.js which are commonly needed for business charts.
 
 ## Publish
 If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes pre-compiled versions of Chartjs that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets:

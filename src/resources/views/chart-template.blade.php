@@ -47,7 +47,9 @@
                     labels: {!! $labels !!},
                     datasets: {!! $datasets !!}
                 },
+                @if($options)
                 options: {!! $options !!}
+                @endif
             });
         })();
     });

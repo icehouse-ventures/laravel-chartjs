@@ -142,10 +142,11 @@ class Builder
     {
         $chart = $this->charts[$this->name];
         $view = $this->useCustomView ? $this->chartViewName : 'chart-template::chart-template';
-        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : '';
-        $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : '';
+        
+        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : null;
+        $optionsSimple = $chart['options'] ? json_encode($chart['options']) : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
-
+        
         return view($view)->with([
             'datasets' => json_encode($chart['datasets']),
             'element' => $this->name,
