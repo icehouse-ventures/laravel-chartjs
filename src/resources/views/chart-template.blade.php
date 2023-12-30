@@ -2,18 +2,42 @@
     @if($delivery == 'CDN')
             @if($version == 4)
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
-                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                @if($date_adapter == 'moment')
+                    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                @elseif($date_adapter == 'luxon')
+                    <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+                @elseif($date_adapter == 'date-fns')
+                    <script src="https://cdn.jsdelivr.net/npm/date-fns@^3/index.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+                @endif
                 <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
             @elseif($version == 3)
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
-                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                @if($date_adapter == 'moment')
+                    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                @elseif($date_adapter == 'luxon')
+                    <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+                @elseif($date_adapter == 'date-fns')
+                    <script src="https://cdn.jsdelivr.net/npm/date-fns@^3/index.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+                @endif
                 <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
             @else
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@^2"></script>
-                <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+                @if($date_adapter == 'moment')
+                    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^0.1.2"></script>
+                @elseif($date_adapter == 'luxon')
+                    <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+                @elseif($date_adapter == 'date-fns')
+                    <script src="https://cdn.jsdelivr.net/npm/date-fns@^3/index.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+                @endif
                 <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
             @endif
     @elseif($delivery == 'publish')

@@ -46,6 +46,8 @@ class Builder
 
         $this->delivery = Config::deliveryMethod();
 
+        $this->date_adapter = Config::dateAdapter();
+
         $this->types = Config::allowedChartTypes();
 
         $this->useCustomView = Config::useCustomView();
@@ -156,6 +158,7 @@ class Builder
             'size' => $chart['size'],
             'version' => $this->version,
             'delivery' => $this->delivery,
+            'date_adapter' => $this->date_adapter,
         ]);
     }
 

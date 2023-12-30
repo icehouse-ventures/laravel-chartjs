@@ -39,18 +39,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Plugins Enabled
+    | Date Plugin
     |--------------------------------------------------------------------------
     |
-    | Plugins are an important part of extending the Chartjs core functionality
-    | we include some common plugins in the pre-configured CDN and binary
-    | build setup. These packages can be controlled below
+    | JavaScript packages like Chartjs often need an add-on time & date package
+    | to enable them to parse, compare, and format dates (similar to how we
+    | use Carbon in Laravel. Chartjs works with the three most popular date
+    | packages. To assist in migrating between packages, the CDN delivery
+    | method allows you to swap between date packages. Make sure to check
+    | the syntax of the callbacks you are using and the capitalisation 
+    | of the date formats as they are different between packages.
     |
-    | Available choices are true and false.
+    | Available choices are 'moment', 'luxon', 'date-fns' and 'none'.
     |
     */
 
-    'plugins' => true,
+    'date_adapter' => 'luxon',
 
     /*
     |--------------------------------------------------------------------------

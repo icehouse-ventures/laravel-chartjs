@@ -24,6 +24,11 @@ class Config
         return config('chartjs.delivery', 'CDN');
     }
 
+    public static function dateAdapter()
+    {
+        return config('chartjs.date_adapter', 'none');
+    }
+
     public static function useCustomView()
     {
         if(!config('chartjs.custom_view')) {
