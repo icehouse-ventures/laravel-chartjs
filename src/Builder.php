@@ -42,17 +42,7 @@ class Builder
             'plugins' => [],
         ];
 
-        $this->version = Config::chartJsVersion();
-
-        $this->delivery = Config::deliveryMethod();
-
-        $this->date_adapter = Config::dateAdapter();
-
         $this->types = Config::allowedChartTypes();
-
-        $this->useCustomView = Config::useCustomView();
-
-        $this->chartViewName = Config::getChartViewName();
     }
 
     /**
@@ -143,10 +133,10 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $view = $this->useCustomView ? $this->chartViewName : 'chart-template::chart-template';
+        $view = Config::getChartViewName();
         
         $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : null;
-        $optionsSimple = $chart['options'] ? json_encode($chart['options']) : null;
+        $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
         
         return view($view)->with([
@@ -156,9 +146,9 @@ class Builder
             'options' => $options,
             'type' => $chart['type'],
             'size' => $chart['size'],
-            'version' => $this->version,
-            'delivery' => $this->delivery,
-            'date_adapter' => $this->date_adapter,
+            'version' => Config::chartJsVersion(),
+            'delivery' => Config::deliveryMethod(),
+            'date_adapter' => Config::dateAdapter(),
         ]);
     }
 
