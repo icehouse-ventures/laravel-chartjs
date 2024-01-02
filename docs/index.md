@@ -2,6 +2,8 @@
 
 Welcome to the Laravel Chartjs graphs and charts package for Laravel. This page will walk you through the process of creating a chart in a Laravel application using the Laravel Chartjs package, with data from a User model.
 
+![Laravel Chart.js Demo](/docs/images/laravel-8-welcome.png)
+
 ### Prerequisites
 
 Before you begin, ensure you have the following:
@@ -41,17 +43,19 @@ First, we need to prepare the data for the chart. In your `UserController`, add 
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
 
 class UserController extends \App\Http\Controllers\Controller
 {
 
-    public function index()
+    public function showChart()
     {
     
-        $start = User::min("created_at");
-        $end = now();
-        $period = new \Carbon\CarbonPeriod($start, "1 month", $end);
+        $start = Carbon::parse(User::min("created_at"));
+        $end = Carbon::now();
+        $period = CarbonPeriod::create($start, "1 month", $end);
 
         $usersPerMonth = collect($period)->map(function ($date) {
             $endDate = $date->copy()->endOfMonth();
@@ -115,7 +119,7 @@ Create a Blade file named `chart.blade.php` in the `resources/views/user` direct
 <body>
     <h1>Monthly User Registrations</h1>
     <div style="width:75%;">
-        {!! $chartjs->render() !!}
+        {!! $chart->render() !!}
     </div>
 </body>
 </html>
@@ -128,9 +132,16 @@ Make sure to add a route to display the chart:
 ```php
 Route::get('/user/chart', 'UserController@showChart');
 ```
+
+#### 5. Conclusion
+
 You've now created a line chart displaying user registrations per month using the LaravelChartjs package. Visit `/user/chart` in your Laravel application to view the chart.
 
-### 5. Advanced Customization
+For more advanced usage and customization options, refer to the official Chart.js documentation.
+
+![User Registrations Chart](/docs/images/laravel-demo-user-chart.png)
+
+### Advanced Customization
 
 To further customize your charts, you can modify the following properties:
 
@@ -140,8 +151,7 @@ To further customize your charts, you can modify the following properties:
 
 Refer to the Chart.js documentation for a full list of customization options.
 
-
-### 6. Troubleshooting and Debugging
+### Troubleshooting and Debugging
 
 If you encounter issues while creating or displaying charts, here are some common problems and their solutions:
 
@@ -151,6 +161,11 @@ If you encounter issues while creating or displaying charts, here are some commo
 
 For more detailed error messages, check the Laravel log files, and for browser-related issues, inspect the console for JavaScript errors.
 
-### Conclusion
+![Laravel 5 and Chart.js Legacy Upgrade Path](/docs/images/laravel-5-welcome.png)
 
-For more advanced usage and customization options, refer to the official Chart.js documentation.
+### Additional Resources
+
+GitHub Repository (View source code and installation instructions): [icehouse-ventures/laravel-chartjs](https://github.com/icehouse-ventures/laravel-chartjs)
+Packagist (Laravel package setup using php composer): [icehouse-ventures/laravel-chartjs](https://packagist.org/packages/icehouse-ventures/laravel-chartjs)
+Wiki (for upgrade guides for older Chart.js and package versions and general information): [icehouse-ventures/laravel-chartjs/wiki](https://github.com/icehouse-ventures/laravel-chartjs/wiki)
+Discussions (for support, tips and suggestions): [icehouse-ventures/laravel-chartjs/discussions](https://github.com/icehouse-ventures/laravel-chartjs/discussions)
