@@ -2,7 +2,7 @@
 
 Welcome to the Laravel Chartjs graphs and charts package for Laravel. This page will walk you through the process of creating a chart in a Laravel application using the Laravel Chartjs package, with data from a User model.
 
-![Laravel Chart.js Demo](/docs/images/laravel-8-welcome.png)
+![Laravel Chart.js Demo](/laravel-chartjs/images/laravel-8-welcome.png)
 
 ### Prerequisites
 
@@ -139,7 +139,7 @@ You've now created a line chart displaying user registrations per month using th
 
 For more advanced usage and customization options, refer to the official Chart.js documentation.
 
-![User Registrations Chart](/docs/images/laravel-demo-user-chart.png)
+![User Registrations Chart](/laravel-chartjs/images/laravel-demo-user-chart.png)
 
 ### Advanced Customization
 
@@ -161,11 +161,15 @@ If you encounter issues while creating or displaying charts, here are some commo
 
 For more detailed error messages, check the Laravel log files, and for browser-related issues, inspect the console for JavaScript errors.
 
-![Laravel 5 and Chart.js Legacy Upgrade Path](/docs/images/laravel-5-welcome.png)
+![Laravel 5 and Chart.js Legacy Upgrade Path](/laravel-chartjs/images/laravel-5-welcome.png)
+
 
 ### Additional Resources
 
-GitHub Repository (View source code and installation instructions): [icehouse-ventures/laravel-chartjs](https://github.com/icehouse-ventures/laravel-chartjs)
-Packagist (Laravel package setup using php composer): [icehouse-ventures/laravel-chartjs](https://packagist.org/packages/icehouse-ventures/laravel-chartjs)
-Wiki (for upgrade guides for older Chart.js and package versions and general information): [icehouse-ventures/laravel-chartjs/wiki](https://github.com/icehouse-ventures/laravel-chartjs/wiki)
-Discussions (for support, tips and suggestions): [icehouse-ventures/laravel-chartjs/discussions](https://github.com/icehouse-ventures/laravel-chartjs/discussions)
+- **GitHub Repository**: View source code and installation instructions: [github.com/icehouse-ventures/laravel-chartjs](https://github.com/icehouse-ventures/laravel-chartjs)
+
+- **Packagist**: Laravel package setup using php composer: [packagist.org/packages/icehouse-ventures/laravel-chartjs](https://packagist.org/packages/icehouse-ventures/laravel-chartjs)
+
+- **Wiki**: Upgrade guides for older Chart.js and package versions and general information: [github.com/icehouse-ventures/laravel-chartjs/wiki](https://github.com/icehouse-ventures/laravel-chartjs/wiki)
+
+- **Discussions**: For support, tips and suggestions: [github.com/icehouse-ventures/laravel-chartjs/discussions](https://github.com/icehouse-ventures/laravel-chartjs/discussions)
