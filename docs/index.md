@@ -17,7 +17,7 @@ Before you begin, ensure you have the following:
 If you haven't already installed LaravelChartjs, you can do so via composer:
 
 ```bash
-composer require icehouseventures/laravel-chartjs
+composer require icehouse-ventures/laravel-chartjs
 ```
 
 ### Configuration
