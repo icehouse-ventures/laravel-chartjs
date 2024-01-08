@@ -25,10 +25,10 @@ composer require icehouse-ventures/laravel-chartjs
 Publish the configuration file to customize the package settings:
 
 ```bash
-php artisan vendor:publish --provider="IcehouseVentures\\LaravelChartjs\\ServiceProvider"
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider"
 ```
 
-Set the chartjs version to 4 to use the current version of chartjs and the delivery method to CDN for rapid setup and easy testing.
+In the config/chart.js.php Set the chartjs version to 4 to use the current version of chartjs and the delivery method to CDN for rapid setup and easy testing.
 
 ### Creating a Chart
 
