@@ -18,12 +18,16 @@
 
     "autoload": {
       "psr-4": {
-        "IcehouseVentures\\LaravelChartjs\\" : "src/",
-        "IcehouseVentures\\LaravelChartjs\\Tests\\": "tests/"
+        "IcehouseVentures\\LaravelChartjs\\" : "src/"
 
       }
     },
-    
+    "autoload-dev": {
+        "psr-4": {
+          "IcehouseVentures\\LaravelChartjs\\Tests\\": "tests/"
+  
+        }
+      },
     "extra": {
         "laravel": {
             "providers": [
