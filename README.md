@@ -69,70 +69,51 @@ $service = app()->chartjs
 
 The builder needs the name of the chart, the type of chart that can be anything that is supported by Chartjs and the other custom configurations like labels, datasets, size and options.
 
-In the dataset interface you can pass any configuration and option to your chart.
-All options available in Chartjs documentation are supported.
+In the dataset interface you can pass any configuration and option to your chart.All options available in Chartjs documentation are supported.
 Just write the configuration with php array notations and it works!
+
+```php
+$chart->options([
+        'scales' => [
+            'x' => [
+                'title' => [
+                    'display' => true,
+                    'text' => 'X Axis Title'
+                ],
+            ]
+        ]
+    ]);
+```
 
 # Advanced Chartjs options
 
-The basic options() method allows you to add simple key-value pair based options, but it is not possible to generate nested options such as those used to do complex formatting on scales (Chartjs v3 example):
-
-```php
-    options: {
-        scales: {
-            x: {
-                type: 'time',
-                time: {
-                    displayFormats: {
-                        quarter: 'MMM YYYY'
-                    }
-                }
-            }
-        }
-    }
-```
-
-Using the optionsRaw() method it's possible to add nested Chartjs options in raw format (Chartjs v2 example):
+The basic options() method allows you to add simple key-value pair based options. Using the optionsRaw() method it's possible to add more complex nested Chartjs options in raw json format and call the options for plugins:
 
 Passing string format like a json
 ```php
-        $chart->optionsRaw("{
-            legend: {
-                display:false
-            },
-            scales: {
-                xAxes: [{
-                    gridLines: {
-                        display:false
-                    }  
-                }]
+$chart->optionsRaw("{
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'X Axis Title',
+                }
             }
-        }");
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Chart Title',
+                font: {
+                    size: 16
+                }
+            },
+            legend: {
+                display: false,
+            },
+        }
+    }");
 ```
-
-Or, if you prefer, you can pass a php array format and the package will convert it to the JSON format used by Chartjs:
-
-```php
-$chart->optionsRaw([
-    'legend' => [
-        'display' => true,
-        'labels' => [
-            'fontColor' => '#000'
-        ]
-    ],
-    'scales' => [
-        'xAxes' => [
-            [
-                'stacked' => true,
-                'gridLines' => [
-                    'display' => true
-                ]
-            ]
-        ]
-    ]
-]);
-```
-
 
 # Examples
 
@@ -243,9 +224,9 @@ return view('example', compact('chartjs'));
 ```
 
 # Advanced custom views
-If you want to customise the appearance of all charts in your application (for example tweaking the mobile responsive css settings), then it is recommended to create a standard blade component and insert the {!! $chartjs->render() !!} reference inside your custom component (be sure to pass down the variable from your controller to your component). If for some reason need to edit the core blade template (for example to adjust the CDN logic or make deeper CSS changes to the canvas styling), then you can publish the blade template to your resources\vendor\laravelchartjs folder and edit the custom-chart-template.blade.php 
+If you want to customise the appearance of all charts in your application (for example tweaking the mobile responsive css settings), then it is recommended to create a standard blade component and insert the {!! $chartjs->render() !!} reference inside your custom component (be sure to pass down the variable from your controller to your component). If for some reason you really need to edit the core blade template (for example to adjust the CDN logic or make deeper CSS changes to the canvas styling), then you can publish the blade template to your resources\vendor\laravelchartjs folder and edit the custom-chart-template.blade.php 
 
-To activate the custom blade template changes you can set the config option 'custom_view' to true.
+To activate the custom blade template changes, you can set the config option 'custom_view' to true.
 
 ```bash
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="views" --force
