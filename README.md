@@ -117,7 +117,7 @@ $chart->optionsRaw("{
 
 # Examples
 
-1 - Line Chart / Radar Chart:
+1 - Line Chart:
 ```php
 // ExampleController.php
 
@@ -135,7 +135,8 @@ $chartjs = app()->chartjs
                 "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                 "pointHoverBackgroundColor" => "#fff",
                 "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [65, 59, 80, 81, 56, 55, 40],
+                "data" => [65, 59, 80, 81, 56, 55, 40],
+                "fill" => false,
             ],
             [
                 "label" => "My Second dataset",
@@ -145,7 +146,8 @@ $chartjs = app()->chartjs
                 "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                 "pointHoverBackgroundColor" => "#fff",
                 "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [12, 33, 44, 44, 55, 23, 40],
+                "data" => [12, 33, 44, 44, 55, 23, 40],
+                "fill" => false,
             ]
         ])
         ->options([]);
@@ -182,7 +184,13 @@ $chartjs = app()->chartjs
                  'data' => [65, 12]
              ]
          ])
-         ->options([]);
+         ->options([
+            "scales" => [
+                "y" => [
+                    "beginAtZero" => true
+                    ]
+                ]
+         ]);
 
 return view('example', compact('chartjs'));
 
