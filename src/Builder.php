@@ -31,6 +31,16 @@ class Builder
      */
     private $types;
 
+    /**
+     * @var boolean
+     */
+    public $inLivewire = false;
+
+    /**
+     * @var string
+     */
+    public $model = false;
+
     public function __construct()
     {
         $this->defaults = [
@@ -53,6 +63,22 @@ class Builder
         $this->name = $name;
         $this->charts[$name] = $this->defaults;
         return $this;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function livewire()
+    {
+        return $this->set('inLivewire', true);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function model($model)
+    {
+        return $this->set('model', $model);
     }
 
     /**
@@ -133,15 +159,18 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $view = Config::getChartViewName();
-        
+        $inLivewire = $chart['inLivewire'] ?? false;
+        $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
+
         $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : null;
         $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
-        
+
         return view($view)->with([
             'datasets' => json_encode($chart['datasets']),
             'element' => $this->name,
+            'inLivewire' => $inLivewire,
+            'model' => $chart['model'] ?? false,
             'labels' => json_encode($chart['labels']),
             'options' => $options,
             'type' => $chart['type'],
