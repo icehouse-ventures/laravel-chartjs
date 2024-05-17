@@ -162,7 +162,7 @@ class Builder
         $inLivewire = $chart['inLivewire'] ?? false;
         $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
 
-        $optionsRaw = isset($chart['optionsRaw']) ? $chart['optionsRaw'] : null;
+        $optionsRaw = $chart['optionsRaw'] ?? null;
         $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
 

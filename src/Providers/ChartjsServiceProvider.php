@@ -21,7 +21,6 @@ class ChartjsServiceProvider extends ServiceProvider
         $this->colours = config('chartjs.colours');
 
         // Installation and setup
-
         $this->publishes([
             __DIR__.'/../../config/chartjs.php' => config_path('chartjs.php'),
         ], 'config');
@@ -45,13 +44,11 @@ class ChartjsServiceProvider extends ServiceProvider
         // Delivery and view injection
 
         if(config('chartjs.delivery') == 'binary') {
-            
             if(config('chartjs.version') == 4) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv4', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
                 });
-            }
-            elseif(config('chartjs.version') == 3) {
+            } elseif(config('chartjs.version') == 3) {
                 view()->composer('chart-template::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart3.js')));
                 });
