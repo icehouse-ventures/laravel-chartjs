@@ -240,6 +240,60 @@ To activate the custom blade template changes, you can set the config option 'cu
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="views" --force
 ```
 
+# Livewire Support
+This package has prototype support for live updating on Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
+
+```php
+ // In your parent Livewire blade component 
+ <div class="chart-container">
+    {!! $this->chart->render() !!}
+ </div>
+```
+
+```php
+// In your parent Livewire component
+class UsersChart extends Component
+{
+    public $datasets;
+
+    #[Computed]
+    public function chart()
+    {
+        return app()
+            ->chartjs
+            ->name("UserRegistrationsChart")
+            ->livewire()
+            ->model("datasets")
+            ->type("line");
+    }
+
+    public function render()
+    {
+        $this->getData();
+
+        return view('livewire.users-chart');
+    }
+    
+    public function getData()
+    {
+        $data = []; // your data here
+        $labels = []; // your labels here
+        
+        $this->datasets = [
+            'datasets' => [
+                [
+                    "label" => "User Registrations",
+                    "backgroundColor" => "rgba(38, 185, 154, 0.31)",
+                    "borderColor" => "rgba(38, 185, 154, 0.7)",
+                    "data" => $data
+                ]
+            ],
+            'labels' => $labels
+        ]
+    }
+}
+```
+
 # Issues
 This README, as well as the package, is in development, but will be constantly updated, and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
 
