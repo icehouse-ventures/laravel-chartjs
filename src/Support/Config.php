@@ -8,10 +8,13 @@ class Config
 {
     public static function allowedChartTypes()
     {
+        $base_types = ['bar', 'horizontalBar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
+
         if (self::chartJsVersion() > 3) {
-            return ['bar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
+            $base_types = ['bar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
         }
-        return ['bar', 'horizontalBar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
+
+        return array_merge($base_types, array_keys(config('chartjs.custom_chart_types', [])));
     }
 
     public static function chartJsVersion()

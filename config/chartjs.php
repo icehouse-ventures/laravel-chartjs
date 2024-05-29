@@ -75,4 +75,21 @@ return [
 
     'custom_view' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Chart Type Plugins
+    |--------------------------------------------------------------------------
+    |
+    | You can add plugins to Charjs for various custom chart types
+    | by adding the name of the chart type and the URL to the plugin.
+    | This is useful for adding custom chart types to the package
+    | without having to modify the package itself.
+    |
+    | Available choices are type labels and urls to CDNs. such as:
+    | 'treemap' => 'https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@2.3.1/dist/chartjs-chart-treemap.min.js'
+    |
+    */
+
+    'custom_chart_types' => []
+    
 ];
