@@ -102,7 +102,7 @@
                 let { labels, datasets } = dataset
 
                 return new Chart(el, {
-                    type: 'line',
+                    type: {!! $type !!},
                     data: {
                         labels: labels,
                         datasets: datasets,

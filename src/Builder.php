@@ -141,7 +141,7 @@ class Builder
      * @param  string|array  $optionsRaw
      * @return \self
      */
-    public function optionsRaw($optionsRaw)
+    public function optionsRaw(string|array $optionsRaw)
     {
         if (is_array($optionsRaw)) {
             $this->set('optionsRaw', json_encode($optionsRaw, true));
@@ -163,7 +163,7 @@ class Builder
         $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
 
         $optionsRaw = $chart['optionsRaw'] ?? null;
-        $optionsSimple = isset($chart['options']) ? json_encode($chart['options']) : null;
+        $optionsSimple = $chart['options'] ? json_encode($chart['options']) : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
 
         return view($view)->with([
