@@ -50,6 +50,11 @@
             @endif
             <script src="https://cdn.jsdelivr.net/npm/numeral@2.0.6/numeral.min.js"></script>
         @endif
+        @if(Config::get('chartjs.custom_chart_types'))
+            @foreach(Config::get('chartjs.custom_chart_types') as $label => $cdn)
+                <script src="{{ $cdn }}"></script>
+            @endforeach
+        @endif
     @elseif($delivery == 'publish')
         @if($version == 4)
             <script type="module" src="{{ asset('vendor/laravelchartjs/chart.js') }}"></script>
@@ -102,14 +107,12 @@
                 let { labels, datasets } = dataset
 
                 return new Chart(el, {
-                    type: {!! $type !!},
+                    type: '{!! $type !!}',
                     data: {
                         labels: labels,
                         datasets: datasets,
                     },
-                    @if($options)
-                    options: {!! $options !!}
-                    @endif
+                    {!! isset($options) ? 'options: ' . $options : '' !!}
                 })
             },
         }
