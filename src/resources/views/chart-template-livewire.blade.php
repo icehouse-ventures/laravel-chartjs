@@ -83,7 +83,7 @@
             init() {
                 chart = this.initChart(this.$wire.{{ $model }})
 
-                this.$wire.$watch('{{ $model }}', () => {
+                this.$watch('$wire.{{ $model }}', () => {
                     this.updateChart(chart, this.$wire.{{ $model }})
                 })
             },
@@ -97,7 +97,13 @@
                 let { labels, datasets } = dataset
 
                 chart.data.labels = labels
-                chart.data.datasets[0].data = datasets[0].data
+
+                if (chart.config.type === 'treemap') {
+                    chart.data.datasets[0].tree = datasets[0].tree
+                } else {
+                    chart.data.datasets[0].data = datasets[0].data
+                }
+
                 chart.update()
             },
 
