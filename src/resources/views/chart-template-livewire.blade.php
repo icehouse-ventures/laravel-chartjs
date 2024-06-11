@@ -76,6 +76,10 @@
 
 @script
 <script>
+    if (typeof ChartjsPluginStacked100 !== 'undefined') {
+        Chart.register(ChartjsPluginStacked100.default);
+    }
+
     Alpine.data('chart', Alpine.skipDuringClone(() => {
         let chart
 
