@@ -84,7 +84,7 @@
                 chart = this.initChart(this.$wire.{{ $model }})
 
                 this.$watch('$wire.{{ $model }}', () => {
-                    this.updateChart(chart, this.$wire.{{ $model }})
+                    this.updateChart(chart, this.$wire.{{ $model }}, {!! $options !!})
                 })
             },
 
@@ -92,8 +92,7 @@
                 chart.destroy()
             },
 
-            updateChart(chart, dataset)
-            {
+            updateChart(chart, dataset, options) {
                 let { labels, datasets } = dataset
 
                 chart.data.labels = labels
@@ -103,6 +102,8 @@
                 } else {
                     chart.data.datasets[0].data = datasets[0].data
                 }
+
+                chart.options = options
 
                 chart.update()
             },
@@ -118,7 +119,7 @@
                         labels: labels,
                         datasets: datasets,
                     },
-                    {!! isset($options) ? 'options: ' . $options : '' !!}
+                    options: {!! $options !!},
                 })
             },
         }
