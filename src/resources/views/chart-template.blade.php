@@ -69,6 +69,9 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         (function() {
     		"use strict";
+            if (typeof ChartjsPluginStacked100 !== 'undefined') {
+                Chart.register(ChartjsPluginStacked100.default);
+            }
             var ctx = document.getElementById("{!! $element !!}");
             window.{!! $element !!} = new Chart(ctx, {
                 type: '{!! $type !!}',
