@@ -97,10 +97,16 @@
 
                 chart.data.labels = labels
 
+                const datasetsLength = chart.data.datasets.length;
+
                 if (chart.config.type === 'treemap') {
-                    chart.data.datasets[0].tree = datasets[0].tree
+                  for (let i = 0; i < datasetsLength; i++) {
+                    chart.data.datasets[i].tree = datasets[i].tree
+                  }
                 } else {
-                    chart.data.datasets[0].data = datasets[0].data
+                  for (let i = 0; i < datasetsLength; i++) {
+                    chart.data.datasets[i].data = datasets[i].data
+                  }
                 }
 
                 chart.options = options
