@@ -32,7 +32,7 @@ class Builder
     private $types;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $inLivewire = false;
 
@@ -138,7 +138,6 @@ class Builder
     }
 
     /**
-     * @param  string|array  $optionsRaw
      * @return \self
      */
     public function optionsRaw(string|array $optionsRaw)

@@ -47,7 +47,7 @@ return [
     | use Carbon in Laravel. Chartjs works with the three most popular date
     | packages. To assist in migrating between packages, the CDN delivery
     | method allows you to swap between date packages. Make sure to check
-    | the syntax of the callbacks you are using and the capitalisation 
+    | the syntax of the callbacks you are using and the capitalisation
     | of the date formats as they are different between packages.
     |
     | Available choices are 'moment', 'luxon', 'date-fns' and 'none'.
@@ -90,6 +90,6 @@ return [
     |
     */
 
-    'custom_chart_types' => []
-    
+    'custom_chart_types' => [],
+
 ];
