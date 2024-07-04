@@ -1,9 +1,10 @@
 <div>
     <div
-        x-data="chart(@js($this->$model), {!! $options  !!})"
+        x-data="chart"
+        wire:ignore
         wire:loading.class="opacity-50"
     >
-        <canvas width="@js($size['width'])" height="@js($size['height'])" wire:ignore></canvas>
+        <canvas width="{!! $size['width'] !!}" height="{!! $size['height'] !!}"></canvas>
     </div>
 </div>
 
@@ -75,19 +76,39 @@
 
 @script
 <script>
-    Alpine.data('chart', Alpine.skipDuringClone((dataset, options) => {
+    Alpine.data('chart', Alpine.skipDuringClone(() => {
         let chart
 
         return {
             init() {
-                chart = this.initChart()
+                chart = this.initChart(this.$wire.{{ $model }})
+
+                this.$watch('$wire.{{ $model }}', () => {
+                    this.updateChart(chart, this.$wire.{{ $model }}, {!! $options !!})
+                })
             },
 
             destroy() {
                 chart.destroy()
             },
 
-            initChart() {
+            updateChart(chart, dataset, options) {
+                let { labels, datasets } = dataset
+
+                chart.data.labels = labels
+
+                if (chart.config.type === 'treemap') {
+                    chart.data.datasets[0].tree = datasets[0].tree
+                } else {
+                    chart.data.datasets[0].data = datasets[0].data
+                }
+
+                chart.options = options
+
+                chart.update()
+            },
+
+            initChart(dataset) {
                 let el = this.$wire.$el.querySelector('canvas')
 
                 let { labels, datasets } = dataset
@@ -98,7 +119,7 @@
                         labels: labels,
                         datasets: datasets,
                     },
-                    options: options,
+                    options: {!! $options !!},
                 })
             },
         }
