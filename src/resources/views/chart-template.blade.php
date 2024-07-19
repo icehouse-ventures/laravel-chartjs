@@ -77,7 +77,7 @@
                     datasets: {!! $datasets !!}
                 },
                 @if($options)
-                options: {!! $options !!}
+                options: @js($options)
                 @endif
             });
         })();
