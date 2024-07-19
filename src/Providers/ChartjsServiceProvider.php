@@ -2,6 +2,7 @@
 
 namespace IcehouseVentures\LaravelChartjs\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use IcehouseVentures\LaravelChartjs\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +17,6 @@ class ChartjsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
-
         $this->colours = config('chartjs.colours');
 
         // Installation and setup
@@ -42,7 +41,6 @@ class ChartjsServiceProvider extends ServiceProvider
         ], 'assets-v2');
 
         // Delivery and view injection
-
         if(config('chartjs.delivery') == 'binary') {
             if(config('chartjs.version') == 4) {
                 view()->composer('chart-template::chart-template', function ($view) {
@@ -58,6 +56,11 @@ class ChartjsServiceProvider extends ServiceProvider
                 });
             }
         }
+
+        // Register our Blade component
+        Blade::component('chartjs-component', \IcehouseVentures\LaravelChartjs\View\Components\ChartjsComponent::class);
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
     }
 
     /**
