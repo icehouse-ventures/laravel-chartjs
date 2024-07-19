@@ -158,7 +158,7 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $inLivewire = $chart['inLivewire'] ?? false;
+        $inLivewire = $chart['inLivewire'] ?? (class_exists('Livewire\\Livewire') ? \Livewire\Livewire::isLivewireRequest() : false);
         $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
 
         $optionsRaw = $chart['optionsRaw'] ?? null;
