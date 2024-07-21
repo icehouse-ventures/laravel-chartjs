@@ -71,14 +71,12 @@
     		"use strict";
             var ctx = document.getElementById("{!! $element !!}");
             window.{!! $element !!} = new Chart(ctx, {
-                type: '{!! $type !!}',
+                type: @js($type),
                 data: {
                     labels: {!! $labels !!},
                     datasets: {!! $datasets !!}
                 },
-                @if($options)
                 options: @js($options)
-                @endif
             });
         })();
     });
