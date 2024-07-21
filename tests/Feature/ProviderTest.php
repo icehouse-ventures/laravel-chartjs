@@ -48,5 +48,5 @@ it('publishes views', function () {
     ]);
 
     // Assert that the views have been published
-    $this->assertFileExists(resource_path('views/vendor/laravelchartjs/custom-chart-template.blade.php'));
+    $this->assertFileExists(resource_path('views/vendor/laravelchartjs/chart-template.blade.php'));
 });

@@ -159,7 +159,7 @@ class Builder
     {
         $chart = $this->charts[$this->name];
         $inLivewire = $chart['inLivewire'] ?? (class_exists('Livewire\\Livewire') ? \Livewire\Livewire::isLivewireRequest() : false);
-        $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
+        $view = ($inLivewire ? 'laravelchartjs::chart-template-livewire' : 'laravelchartjs::chart-template');
 
         $optionsRaw = $chart['optionsRaw'] ?? null;
         $optionsSimple = $chart['options'] ? $chart['options'] : null;

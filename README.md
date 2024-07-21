@@ -58,7 +58,7 @@ You can request to Service Container the service responsible for building the ch
 and passing through fluent interface the chart settings.
 
 ```php
-$service = app()->chartjs
+$chartjs = app()->chartjs
     ->name()
     ->type()
     ->size()
@@ -158,7 +158,7 @@ return view('example', compact('chartjs'));
  // example.blade.php
 
 <div style="width:75%;">
-    {!! $chartjs->render() !!}
+    <x-chartjs-component :chart="$chartjs" />
 </div>
 ```
 
@@ -198,7 +198,7 @@ return view('example', compact('chartjs'));
  // example.blade.php
 
 <div style="width:75%;">
-    {!! $chartjs->render() !!}
+    <x-chartjs-component :chart="$chartjs" />
 </div>
 ```
 
@@ -227,18 +227,20 @@ return view('example', compact('chartjs'));
  // example.blade.php
 
 <div style="width:75%;">
-    {!! $chartjs->render() !!}
+    <x-chartjs-component :chart="$chartjs" />
 </div>
 ```
 
 # Advanced custom views
-If you want to customise the appearance of all charts in your application (for example tweaking the mobile responsive css settings), then it is recommended to create a standard blade component and insert the {!! $chartjs->render() !!} reference inside your custom component (be sure to pass down the variable from your controller to your component). If for some reason you really need to edit the core blade template (for example to adjust the CDN logic or make deeper CSS changes to the canvas styling), then you can publish the blade template to your resources\vendor\laravelchartjs folder and edit the custom-chart-template.blade.php 
-
-To activate the custom blade template changes, you can set the config option 'custom_view' to true.
+If you need to edit the underlying Blade component (to adjust CDN logic or deeper CSS changes to the `<canvas>` element used to render the charts), you can publish the views:
 
 ```bash
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="views" --force
 ```
+
+You can then customise the Blade file at `./views/vendor/laravelchartjs/chart-template.blade.php` in your application.
+
+To revert any customisation, simply delete or rename this file from your application.
 
 # Livewire Support
 This package has prototype support for live updating on Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
