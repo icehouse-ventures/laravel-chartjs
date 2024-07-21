@@ -24,7 +24,7 @@ class Config
 
     public static function deliveryMethod()
     {
-        return config('chartjs.delivery', 'CDN');
+        return strtolower(config('chartjs.delivery', 'cdn'));
     }
 
     public static function dateAdapter()

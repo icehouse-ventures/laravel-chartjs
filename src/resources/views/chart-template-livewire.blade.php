@@ -8,7 +8,7 @@
 </div>
 
 @assets
-    @if($delivery == 'CDN')
+    @if($delivery == 'cdn')
         @if($version == 4)
             <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
             @if($date_adapter == 'moment')
