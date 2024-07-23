@@ -56,7 +56,14 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
+     */
+    public function build() {
+        return new self();
+    }
+
+    /**
+     * @return Builder
      */
     public function name($name)
     {
@@ -126,7 +133,7 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
      */
     public function options(array $options)
     {
@@ -138,7 +145,7 @@ class Builder
     }
 
     /**
-     * @return \self
+     * @return Builder
      */
     public function optionsRaw(string|array $optionsRaw)
     {
@@ -190,7 +197,7 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
      */
     public function set($key, $value)
     {

@@ -58,7 +58,9 @@ You can request to Service Container the service responsible for building the ch
 and passing through fluent interface the chart settings.
 
 ```php
-$chartjs = app()->chartjs
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
+
+$chartjs = Chartjs::build()
     ->name()
     ->type()
     ->size()
@@ -120,8 +122,9 @@ $chart->optionsRaw("{
 1 - Line Chart:
 ```php
 // ExampleController.php
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = app()->chartjs
+$chartjs = Chartjs::build()
         ->name('lineChartTest')
         ->type('line')
         ->size(['width' => 400, 'height' => 200])
@@ -166,8 +169,9 @@ return view('example', compact('chartjs'));
 2 - Bar Chart:
 ```php
 // ExampleController.php
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = app()->chartjs
+$chartjs = Chartjs::build()
          ->name('barChartTest')
          ->type('bar')
          ->size(['width' => 400, 'height' => 200])
@@ -206,8 +210,9 @@ return view('example', compact('chartjs'));
 3 - Pie Chart / Doughnut Chart:
 ```php
 // ExampleController.php
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = app()->chartjs
+$chartjs = Chartjs::build()
         ->name('pieChartTest')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
@@ -254,6 +259,8 @@ This package has prototype support for live updating on Livewire. See the [demo 
 
 ```php
 // In your parent Livewire component
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
+
 class UsersChart extends Component
 {
     public $datasets;
@@ -261,8 +268,7 @@ class UsersChart extends Component
     #[Computed]
     public function chart()
     {
-        return app()
-            ->chartjs
+        return Chartjs::build()
             ->name("UserRegistrationsChart")
             ->livewire()
             ->model("datasets")

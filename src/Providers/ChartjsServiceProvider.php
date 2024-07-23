@@ -73,5 +73,9 @@ class ChartjsServiceProvider extends ServiceProvider
         $this->app->bind('chartjs', function () {
             return new Builder();
         });
+
+        $this->app->singleton('chartjs', function() {
+            return new Builder();
+        });
     }
 }
