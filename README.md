@@ -40,7 +40,7 @@ By default, the publish method will install Chartjs version 4 using the latest b
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets"
 
 // Publish Chartjs version 3 assets 
-php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets-v3
+php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets-v3"
 
 // Publish Chartjs version 2 assets 
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --force --tag="assets-v2"
@@ -60,7 +60,7 @@ and passing through fluent interface the chart settings.
 ```php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = Chartjs::build()
+$chart = Chartjs::build()
     ->name()
     ->type()
     ->size()
@@ -121,10 +121,10 @@ $chart->optionsRaw("{
 
 1 - Line Chart:
 ```php
-// ExampleController.php
+// Controller CExampleController.php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = Chartjs::build()
+$chart = Chartjs::build()
         ->name('lineChartTest')
         ->type('line')
         ->size(['width' => 400, 'height' => 200])
@@ -155,23 +155,22 @@ $chartjs = Chartjs::build()
         ])
         ->options([]);
 
-return view('example', compact('chartjs'));
+return view('example', compact('chart'));
 
-
- // example.blade.php
+// Blade example.blade.php
 
 <div style="width:75%;">
-    <x-chartjs-component :chart="$chartjs" />
+    <x-chartjs-component :chart="$chart" />
 </div>
 ```
 
 
 2 - Bar Chart:
 ```php
-// ExampleController.php
+// Controller ExampleController.php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = Chartjs::build()
+$chart = Chartjs::build()
          ->name('barChartTest')
          ->type('bar')
          ->size(['width' => 400, 'height' => 200])
@@ -196,23 +195,22 @@ $chartjs = Chartjs::build()
                 ]
          ]);
 
-return view('example', compact('chartjs'));
+return view('example', compact('chart'));
 
-
- // example.blade.php
+// Blade example.blade.php
 
 <div style="width:75%;">
-    <x-chartjs-component :chart="$chartjs" />
+    <x-chartjs-component :chart="$chart" />
 </div>
 ```
 
 
 3 - Pie Chart / Doughnut Chart:
 ```php
-// ExampleController.php
+// Controller ExampleController.php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-$chartjs = Chartjs::build()
+$chart = Chartjs::build()
         ->name('pieChartTest')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
@@ -226,24 +224,23 @@ $chartjs = Chartjs::build()
         ])
         ->options([]);
 
-return view('example', compact('chartjs'));
+return view('example', compact('chart'));
 
-
- // example.blade.php
+// Blade example.blade.php
 
 <div style="width:75%;">
-    <x-chartjs-component :chart="$chartjs" />
+    <x-chartjs-component :chart="$chart" />
 </div>
 ```
 
-# Advanced custom views
+# Advanced Custom Views
 If you need to edit the underlying Blade component (to adjust CDN logic or deeper CSS changes to the `<canvas>` element used to render the charts), you can publish the views:
 
 ```bash
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="views" --force
 ```
 
-You can then customise the Blade file at `./views/vendor/laravelchartjs/chart-template.blade.php` in your application.
+You can then customise the published Blade file at `./views/vendor/laravelchartjs/chart-template.blade.php` in your application.
 
 To revert any customisation, simply delete or rename this file from your application.
 
@@ -251,17 +248,21 @@ To revert any customisation, simply delete or rename this file from your applica
 This package has prototype support for live updating on Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
 
 ```php
- // In your parent Livewire blade component 
- <div class="chart-container">
-    {!! $this->chart->render() !!}
- </div>
+ // Inside your Livewire blade component: example-livewire-chart-demo.blade.php
+<div class="main">
+
+    <div class="chart-container">
+        <x-chartjs-component :chart="$chart" />
+    </div>
+
+</div>
 ```
 
 ```php
-// In your parent Livewire component
+// Inside your  Livewire php component: ExampleLivewireChartDemo.php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 
-class UsersChart extends Component
+class ExampleLivewireChartDemo extends Component
 {
     public $datasets;
 
@@ -279,7 +280,7 @@ class UsersChart extends Component
     {
         $this->getData();
 
-        return view('livewire.users-chart');
+        return view('livewire.example-livewire-chart-demo');
     }
     
     public function getData()

@@ -46,6 +46,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Collection;
+use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
+
+
 
 class UserController extends \App\Http\Controllers\Controller
 {
@@ -69,7 +72,7 @@ class UserController extends \App\Http\Controllers\Controller
         $data = $usersPerMonth->pluck("count")->toArray();
         $labels = $usersPerMonth->pluck("month")->toArray();
 
-        $chartjs = app()->chartjs
+        $chart = Chartjs::build()
             ->name("UserRegistrationsChart")
             ->type("line")
             ->size(["width" => 400, "height" => 200])
@@ -100,7 +103,7 @@ class UserController extends \App\Http\Controllers\Controller
                 ]
             ]);
 
-        return view("user.chart", compact("chartjs"));
+        return view("user.chart", compact("chart"));
 
     }
 }
@@ -119,7 +122,7 @@ Create a Blade file named `chart.blade.php` in the `resources/views/user` direct
 <body>
     <h1>Monthly User Registrations</h1>
     <div style="width:75%;">
-        <x-chartjs-component :chart="$chartjs" />
+        <x-chartjs-component :chart="$chart" />
     </div>
 </body>
 </html>
