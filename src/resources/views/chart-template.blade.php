@@ -1,5 +1,5 @@
 @once
-    @if($delivery == 'CDN')
+    @if($delivery == 'cdn')
             @if($version == 4)
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
                 @if($date_adapter == 'moment')
@@ -71,14 +71,12 @@
     		"use strict";
             var ctx = document.getElementById("{!! $element !!}");
             window.{!! $element !!} = new Chart(ctx, {
-                type: '{!! $type !!}',
+                type: @js($type),
                 data: {
                     labels: {!! $labels !!},
                     datasets: {!! $datasets !!}
                 },
-                @if($options)
-                options: {!! $options !!}
-                @endif
+                options: @js($options)
             });
         })();
     });

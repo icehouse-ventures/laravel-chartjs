@@ -69,8 +69,8 @@ class UserController extends \App\Http\Controllers\Controller
         $data = $usersPerMonth->pluck("count")->toArray();
         $labels = $usersPerMonth->pluck("month")->toArray();
 
-        $chart = app()
-            ->chartjs->name("UserRegistrationsChart")
+        $chartjs = app()->chartjs
+            ->name("UserRegistrationsChart")
             ->type("line")
             ->size(["width" => 400, "height" => 200])
             ->labels($labels)
@@ -100,7 +100,7 @@ class UserController extends \App\Http\Controllers\Controller
                 ]
             ]);
 
-        return view("user.chart", compact("chart"));
+        return view("user.chart", compact("chartjs"));
 
     }
 }
@@ -119,7 +119,7 @@ Create a Blade file named `chart.blade.php` in the `resources/views/user` direct
 <body>
     <h1>Monthly User Registrations</h1>
     <div style="width:75%;">
-        {!! $chart->render() !!}
+        <x-chartjs-component :chart="$chartjs" />
     </div>
 </body>
 </html>

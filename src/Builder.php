@@ -56,7 +56,14 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
+     */
+    public function build() {
+        return new self();
+    }
+
+    /**
+     * @return Builder
      */
     public function name($name)
     {
@@ -126,7 +133,7 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
      */
     public function options(array $options)
     {
@@ -138,7 +145,7 @@ class Builder
     }
 
     /**
-     * @return \self
+     * @return Builder
      */
     public function optionsRaw(string|array $optionsRaw)
     {
@@ -158,12 +165,13 @@ class Builder
     public function render()
     {
         $chart = $this->charts[$this->name];
-        $inLivewire = $chart['inLivewire'] ?? false;
-        $view = $inLivewire ? 'chart-template::chart-template-livewire' : Config::getChartViewName(); // Should probably add another config setting for the Livewire version
+        $inLivewire = $chart['inLivewire'] ?? (class_exists('Livewire\\Livewire') ? \Livewire\Livewire::isLivewireRequest() : false);
+        $view = ($inLivewire ? 'laravelchartjs::chart-template-livewire' : 'laravelchartjs::chart-template');
 
         $optionsRaw = $chart['optionsRaw'] ?? null;
-        $optionsSimple = $chart['options'] ? json_encode($chart['options']) : null;
+        $optionsSimple = $chart['options'] ? $chart['options'] : null;
         $options = $optionsRaw ? $optionsRaw : $optionsSimple;
+        $options = (is_string($options) ? json_decode($options) : $options);
 
         return view($view)->with([
             'datasets' => json_encode($chart['datasets']),
@@ -189,7 +197,7 @@ class Builder
     }
 
     /**
-     * @return $this|Builder
+     * @return Builder
      */
     public function set($key, $value)
     {

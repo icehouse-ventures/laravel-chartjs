@@ -32,7 +32,10 @@
         "laravel": {
             "providers": [
                 "IcehouseVentures\\LaravelChartjs\\Providers\\ChartjsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Chartjs": "IcehouseVentures\\LaravelChartjs\\Facades\\Chartjs"
+            }
         }
     },
     "require-dev": {

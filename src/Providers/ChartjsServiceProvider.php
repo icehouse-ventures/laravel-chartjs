@@ -2,6 +2,7 @@
 
 namespace IcehouseVentures\LaravelChartjs\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use IcehouseVentures\LaravelChartjs\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +17,6 @@ class ChartjsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'chart-template');
-
         $this->colours = config('chartjs.colours');
 
         // Installation and setup
@@ -26,7 +25,7 @@ class ChartjsServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/views/chart-template.blade.php' => resource_path('views/vendor/laravelchartjs/custom-chart-template.blade.php'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/laravelchartjs'),
         ], 'views');
 
         $this->publishes([
@@ -42,22 +41,26 @@ class ChartjsServiceProvider extends ServiceProvider
         ], 'assets-v2');
 
         // Delivery and view injection
-
         if(config('chartjs.delivery') == 'binary') {
             if(config('chartjs.version') == 4) {
-                view()->composer('chart-template::chart-template', function ($view) {
+                view()->composer('laravelchartjs::chart-template', function ($view) {
                     $view->with('chartJsScriptv4', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart.js')));
                 });
             } elseif(config('chartjs.version') == 3) {
-                view()->composer('chart-template::chart-template', function ($view) {
+                view()->composer('laravelchartjs::chart-template', function ($view) {
                     $view->with('chartJsScriptv3', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart3.js')));
                 });
             } else {
-                view()->composer('chart-template::chart-template', function ($view) {
+                view()->composer('laravelchartjs::chart-template', function ($view) {
                     $view->with('chartJsScriptv2', file_get_contents(base_path('vendor/icehouse-ventures/laravel-chartjs/dist/chart2.bundle.js')));
                 });
             }
         }
+
+        // Register our Blade component
+        Blade::component('chartjs-component', \IcehouseVentures\LaravelChartjs\View\Components\ChartjsComponent::class);
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravelchartjs');
     }
 
     /**
@@ -68,6 +71,10 @@ class ChartjsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('chartjs', function () {
+            return new Builder();
+        });
+
+        $this->app->singleton('chartjs', function() {
             return new Builder();
         });
     }
