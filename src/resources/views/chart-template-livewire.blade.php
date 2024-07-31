@@ -1,6 +1,6 @@
 <div>
     <div
-        x-data="chart(@js($this->{$model}), @js($options))"
+        x-data="chart(@js($this->{$model}), {!! $options  !!})"
         wire:loading.class="opacity-50"
     >
         <canvas width="@js($size['width'])" height="@js($size['height'])" wire:ignore></canvas>

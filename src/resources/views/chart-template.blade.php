@@ -76,7 +76,7 @@
                     labels: {!! $labels !!},
                     datasets: {!! $datasets !!}
                 },
-                options: @js($options)
+                options: {!! $options !!}
             });
         })();
     });
