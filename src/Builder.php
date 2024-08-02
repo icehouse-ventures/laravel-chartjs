@@ -168,7 +168,12 @@ class Builder
         $inLivewire = $chart['inLivewire'] ?? (class_exists('Livewire\\Livewire') ? \Livewire\Livewire::isLivewireRequest() : false);
         $view = ($inLivewire ? 'laravelchartjs::chart-template-livewire' : 'laravelchartjs::chart-template');
 
-        $options = $chart['optionsRaw'] ?? json_encode($chart['options']);
+        $optionsFallback = "{}";
+
+        $optionsSimple = $chart['options'] ? json_encode($chart['options'], true) : null;
+        
+        $options = $chart['optionsRaw'] ?? $optionsSimple ?? $optionsFallback;
+        
 
         return view($view)->with([
             'datasets' => json_encode($chart['datasets']),
