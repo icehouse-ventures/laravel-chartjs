@@ -303,6 +303,35 @@ class ExampleLivewireChartDemo extends Component
 }
 ```
 
+# Legacy Support
+This package also supports older versions of Laravel and Chartjs. The previous syntax for building charts is still supported and can be accessed via the `app()->chartjs` method. The previous blade rendering syntax is also still supported, and can be accessed via the `{{ app()->chartjs()->render() }}` directive. The legacy syntax is particularly useful for migrating to this package from the previous versions of this package.
+
+```php
+// Controller ExampleController.php
+
+$chart = app()->chartjs
+        ->name('pieChartTest')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Label x', 'Label y'])
+        ->datasets([
+            [
+                'backgroundColor' => ['#FF6384', '#36A2EB'],
+                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                'data' => [69, 59]
+            ]
+        ])
+        ->options([]);
+
+return view('example', compact('chart'));
+
+// Blade example.blade.php
+
+<div style="width:75%;">
+    {{ app()->chartjs()->render() }}
+</div>
+```
+
 # Issues
 This README, as well as the package, is in development, but will be constantly updated, and we will keep you informed. Any questions or suggestions preferably open a discussion first before creating an issue.
 
@@ -310,4 +339,4 @@ This README, as well as the package, is in development, but will be constantly u
 LaravelChartjs is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 # Provenance
-Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa. In 2024 the package was adopted by Icehouse Ventures which is an early-stage venture capital firm based in New Zealand. We use Chartjs heavily in our Laravel applications and want to give back to the Laravel community by making Chartjs fast and easy to implement across all major versions and to streamline the upgrade path.
+Some of the original logic for this package was originally developed by Brian Faust. The main package from which this current version of the package is forked was primarily developed and maintained by Felix Costa. In 2024, the package was adopted by Icehouse Ventures which is an early-stage venture capital firm based in New Zealand. We use Chartjs heavily in our Laravel applications and want to give back to the Laravel community by making Chartjs fast and easy to implement across all major versions and to streamline the upgrade path.

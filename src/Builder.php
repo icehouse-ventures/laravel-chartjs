@@ -58,7 +58,8 @@ class Builder
     /**
      * @return Builder
      */
-    public function build() {
+    public function build()
+    {
         return new self();
     }
 
@@ -171,9 +172,9 @@ class Builder
         $optionsFallback = "{}";
 
         $optionsSimple = $chart['options'] ? json_encode($chart['options'], true) : null;
-        
+
         $options = $chart['optionsRaw'] ?? $optionsSimple ?? $optionsFallback;
-        
+
 
         return view($view)->with([
             'datasets' => json_encode($chart['datasets']),

@@ -2,8 +2,6 @@
 
 namespace IcehouseVentures\LaravelChartjs\Support;
 
-use Illuminate\Support\Facades\File;
-
 class Config
 {
     public static function allowedChartTypes()

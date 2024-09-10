@@ -2,8 +2,8 @@
 
 namespace IcehouseVentures\LaravelChartjs\Providers;
 
-use Illuminate\Support\Facades\Blade;
 use IcehouseVentures\LaravelChartjs\Builder;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class ChartjsServiceProvider extends ServiceProvider
@@ -74,7 +74,7 @@ class ChartjsServiceProvider extends ServiceProvider
             return new Builder();
         });
 
-        $this->app->singleton('chartjs-facade', function() {
+        $this->app->singleton('chartjs-facade', function () {
             return new Builder();
         });
     }
