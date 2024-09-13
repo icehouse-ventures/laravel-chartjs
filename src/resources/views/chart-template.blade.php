@@ -65,20 +65,26 @@
 @endonce
 
 <canvas id="{!! $element !!}" width="{!! $size['width'] !!}" height="{!! $size['height'] !!}">
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) {
+    <script>
         (function() {
-    		"use strict";
-            var ctx = document.getElementById("{!! $element !!}");
-            window.{!! $element !!} = new Chart(ctx, {
-                type: @js($type),
-                data: {
-                    labels: {!! $labels !!},
-                    datasets: {!! $datasets !!}
-                },
-                options: {!! $options !!}
-            });
+            var init = function() {
+                "use strict";
+                var ctx = document.getElementById("{!! $element !!}");
+                window.{!! $element !!} = new Chart(ctx, {
+                    type: @js($type),
+                    data: {
+                        labels: {!! $labels !!},
+                        datasets: {!! $datasets !!}
+                    },
+                    options: {!! $options !!}
+                });
+            };
+    
+            if (document.readyState !== 'loading') {
+                init();
+            } else {
+                document.addEventListener("DOMContentLoaded", init);
+            }
         })();
-    });
-</script>
+    </script>
 </canvas>
