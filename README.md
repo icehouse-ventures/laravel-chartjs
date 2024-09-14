@@ -309,7 +309,7 @@ This package also supports older versions of Laravel and Chartjs. The previous s
 ```php
 // Controller ExampleController.php
 
-$chart = app()->chartjs
+$chartjs = app()->chartjs
         ->name('pieChartTest')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
@@ -323,12 +323,12 @@ $chart = app()->chartjs
         ])
         ->options([]);
 
-return view('example', compact('chart'));
+return view('example', compact('chartjs'));
 
 // Blade example.blade.php
 
 <div style="width:75%;">
-    {{ app()->chartjs()->render() }}
+    {!! $chartjs->render() !!}
 </div>
 ```
 
