@@ -1,9 +1,9 @@
 <div>
     <div
-        x-data="chart(@js($this->{$model}), {{ $options }} )"
+        x-data="chart({ element: @js($element) }, @js($this->{$model}), {{ $options }} )"
         wire:loading.class="opacity-50"
     >
-        <canvas width="@js($size['width'])" height="@js($size['height'])" wire:ignore></canvas>
+        <canvas id="{{ $element }}" width="@js($size['width'])" height="@js($size['height'])" wire:ignore></canvas>
     </div>
 </div>
 
@@ -88,10 +88,10 @@
             },
 
             initChart() {
-                let el = this.$wire.$el.querySelector('canvas')
+                const { element } = config
+                const el = this.$wire.$el.querySelector('canvas#' + element)
 
-                let { labels, datasets } = dataset
-
+                const { labels, datasets } = dataset
                 return new Chart(el, {
                     type: @js($type),
                     data: {
@@ -105,3 +105,4 @@
     }))
 </script>
 @endscript
+
