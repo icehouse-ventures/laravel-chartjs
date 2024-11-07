@@ -1,6 +1,6 @@
 <div>
     <div
-        x-data="chart({ element: @js($element) }, @js($this->{$model}), {{ $options }} )"
+        x-data="chart({ element: @js($element), type: @js($type) }, @js($this->{$model}), {{ $options }} )"
         wire:loading.class="opacity-50"
     >
         <canvas id="{{ $element }}" width="@js($size['width'])" height="@js($size['height'])" wire:ignore></canvas>
@@ -75,7 +75,7 @@
 
 @script
 <script>
-    Alpine.data('chart', Alpine.skipDuringClone((dataset, options) => {
+    Alpine.data('chart', Alpine.skipDuringClone((config, dataset, options) => {
         let chart
 
         return {
@@ -88,12 +88,12 @@
             },
 
             initChart() {
-                const { element } = config
+                const { element, type } = config
                 const el = this.$wire.$el.querySelector('canvas#' + element)
 
                 const { labels, datasets } = dataset
                 return new Chart(el, {
-                    type: @js($type),
+                    type: type,
                     data: {
                         labels: labels,
                         datasets: datasets,
