@@ -1,10 +1,9 @@
 # laravel-chartjs - A Chart.js wrapper for Laravel
 
-Simple package to facilitate and automate the use of charts in Laravel 
-using the [Chart.js](http://www.chartjs.org/) library.
+Simple package to facilitate and automate the use of charts in Laravel using the [Chart.js](http://www.chartjs.org/) library.
 
 # Setup:
-This package provides a wrapper for Chartjs that allows it to be used simply and easily inside a Laravel application. The package supports a number of installation methods depending on your needs and familiarity with JavaScript. 
+This package provides a wrapper for Chartjs that allows it to be used simply and easily inside a Laravel application. The package supports a number of installation methods depending on your needs and familiarity with JavaScript.
 
 ## 1. Installing this package
 ```bash
@@ -31,9 +30,9 @@ There are several installation options for Chartjs. By default, this package com
 For rapid development and testing between versions, you can easily set the delivery method to 'CDN' in the config\chartjs.php settings, this will load the specified Chartjs files via an external content delivery network. Chartjs versions 2, 3 and 4 are available by CDN. These also load Moment.js and Numeral.js which are commonly needed for business charts.
 
 ## Publish
-If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes pre-compiled versions of Chartjs that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets.
+If you do not use JavaScript packages anywhere else in your application or are new to JavaScript development, then you may not already have the Node Package Manager, Laravel Mix or Vite set up. In that case, this package includes pre-compiled versions of Chartjs that you can use in your application. To publish the chart.js binary to your application's public folder (where JavaScript bundles are stored) you can publish the package's pre-built distribution assets.
 
-By default, the publish method will install Chartjs version 4 using the latest binary in the package. If you want to publish an older version, we have also included the latest stable Chartjs releases for version 3 and version 2. You can publish these to your public assets folder using the following commands: 
+By default, the publish method will install Chartjs version 4 using the latest version in the package. If you want to publish an older version, we have also included the latest stable Chartjs releases for version 3 and version 2. You can publish these to your public assets folder using the following commands: 
 
 ```bash
 // Publish Chartjs version 4 assets
@@ -47,15 +46,13 @@ php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers
 ```
 
 ## Binary
-In some rare circumstances such as local development without an internet connection, private applications, shared servers or where you cannot access the public folder on your server, then you may wish to have end-users directly load the binary files. This method is not recommended because it streams the contents of the files from inside your application. This delivery method will load the Chartjs files normally published to your assets folder directly from inside your vendor folder. To use this method, set the delivery config variable to 'binary' and choose the Chartjs version you wish to use in the config file. 
+In some rare circumstances, such as local development without an internet connection, private applications, shared servers or where you cannot access the public folder on your server, then you may wish to have end-users directly load the binary files. This method is not recommended because it streams the contents of the files from inside your application. This delivery method will load the Chartjs files normally published to your assets folder, directly from inside your vendor folder. To use this method, set the delivery config variable to 'binary' and choose the Chartjs version you wish to use in the config file. 
 
 ## NPM (Recommended)
 The recommended method to install Chartjs in a web application is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/
 
 # Usage:
-
-You can request to Service Container the service responsible for building the charts
-and passing through fluent interface the chart settings.
+You can call the package Facade to easily load the service responsible for building the charts and then pass through a fluent Laravel-style interface to set your various chart settings.
 
 ```php
 use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
@@ -69,10 +66,9 @@ $chart = Chartjs::build()
     ->options();
 ```
 
-The builder needs the name of the chart, the type of chart that can be anything that is supported by Chartjs and the other custom configurations like labels, datasets, size and options.
+The builder needs the name of the chart, the type of chart (that can be anything that is supported by Chartjs) and the other custom configurations like labels, datasets, size and options.
 
-In the dataset interface you can pass any configuration and option to your chart.All options available in Chartjs documentation are supported.
-Just write the configuration with php array notations and it works!
+In the dataset interface you can pass any configuration and options to your chart. All options available in Chartjs documentation are supported. Just write the configuration with php array notations and it works!
 
 ```php
 $chart->options([
@@ -89,9 +85,9 @@ $chart->options([
 
 # Advanced Chartjs options
 
-The basic options() method allows you to add simple key-value pair based options. Using the optionsRaw() method it's possible to add more complex nested Chartjs options in raw json format and call the options for plugins:
+The basic options() method allows you to add simple key-value pair based options. Using the optionsRaw() method it's possible to add more complex nested Chartjs options in raw json format and to used nested calls to the options for plugins:
 
-Passing string format like a json
+Passing string format raw options to the chart like a json:
 ```php
 $chart->optionsRaw("{
         scales: {
@@ -245,7 +241,7 @@ You can then customise the published Blade file at `./views/vendor/laravelchartj
 To revert any customisation, simply delete or rename this file from your application.
 
 # Livewire Support
-This package has prototype support for live updating on Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
+This package has support for live updating charts through Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
 
 ```php
  // Inside your Livewire blade component: example-livewire-chart-demo.blade.php
