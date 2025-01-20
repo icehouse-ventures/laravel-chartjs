@@ -241,14 +241,14 @@ You can then customise the published Blade file at `./views/vendor/laravelchartj
 To revert any customisation, simply delete or rename this file from your application.
 
 # Livewire Support
-This package has support for live updating charts through Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo)
+This package has support for live updating charts through Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo) Note that the conventions for passing props to Livewire (such as declaring public properties or adding attributes to a function may vary for your Livewire version.
 
 ```php
  // Inside your Livewire blade component: example-livewire-chart-demo.blade.php
 <div class="main">
 
     <div class="chart-container">
-        <x-chartjs-component :chart="$chart" />
+        <x-chartjs-component :chart="$this->chart" />
     </div>
 
 </div>
