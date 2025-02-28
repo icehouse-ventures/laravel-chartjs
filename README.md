@@ -48,8 +48,8 @@ php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers
 ## Binary
 In some rare circumstances, such as local development without an internet connection, private applications, shared servers or where you cannot access the public folder on your server, then you may wish to have end-users directly load the binary files. This method is not recommended because it streams the contents of the files from inside your application. This delivery method will load the Chartjs files normally published to your assets folder, directly from inside your vendor folder. To use this method, set the delivery config variable to 'binary' and choose the Chartjs version you wish to use in the config file. 
 
-## NPM (Recommended)
-The recommended method to install Chartjs in a web application is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/
+## NPM (Best Practice)
+The recommended method to install Chartjs in a web application is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/ If you do not currently have a JavaScript package manager installed, the other delivery methods are helpful until you need one.
 
 # Usage:
 You can call the package Facade to easily load the service responsible for building the charts and then pass through a fluent Laravel-style interface to set your various chart settings.
@@ -200,7 +200,6 @@ return view('example', compact('chart'));
 </div>
 ```
 
-
 3 - Pie Chart / Doughnut Chart:
 ```php
 // Controller ExampleController.php
@@ -240,8 +239,8 @@ You can then customise the published Blade file at `./views/vendor/laravelchartj
 
 To revert any customisation, simply delete or rename this file from your application.
 
-# Livewire Support
-This package has support for live updating charts through Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo) Note that the conventions for passing props to Livewire (such as declaring public properties or adding attributes to a function may vary for your Livewire version.
+# Livewire Interactive Charts
+This package has support for dynamic live updating charts in Livewire. See the [demo repo](https://github.com/icehouse-ventures/laravel-chartjs-demo) Note that the conventions for passing props to Livewire (such as declaring public properties or adding attributes to a function may vary for your Livewire version. 
 
 ```php
  // Inside your Livewire blade component: example-livewire-chart-demo.blade.php
@@ -300,12 +299,12 @@ class ExampleLivewireChartDemo extends Component
 ```
 
 # Legacy Support
-This package also supports older versions of Laravel and Chartjs. The previous syntax for building charts is still supported and can be accessed via the `app()->chartjs` method. The previous blade rendering syntax is also still supported, and can be accessed via the `{{ app()->chartjs()->render() }}` directive. The legacy syntax is particularly useful for migrating to this package from the previous versions of this package.
+This package also supports older versions of Laravel and Chartjs. The previous syntax for building charts is still supported and can be accessed via the `app()->chartjs` method. The previous blade rendering syntax is also still supported, and can be accessed via the `{{ $chart->render() }}` directive. The legacy syntax is particularly useful for migrating to this package from the previous versions of this package.
 
 ```php
 // Controller ExampleController.php
 
-$chartjs = app()->chartjs
+$chart = app()->chartjs
         ->name('pieChartTest')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
@@ -319,12 +318,12 @@ $chartjs = app()->chartjs
         ])
         ->options([]);
 
-return view('example', compact('chartjs'));
+return view('example', compact('chart'));
 
 // Blade example.blade.php
 
 <div style="width:75%;">
-    {!! $chartjs->render() !!}
+    {!! $chart->render() !!}
 </div>
 ```
 
