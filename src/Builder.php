@@ -151,13 +151,43 @@ class Builder
     public function optionsRaw(string|array $optionsRaw)
     {
         if (is_array($optionsRaw)) {
-            $this->set('optionsRaw', json_encode($optionsRaw, true));
+            $this->set('optionsRaw', json_encode($optionsRaw, JSON_THROW_ON_ERROR));
             return $this;
         }
 
+        // Validate that the string contains valid JavaScript object syntax
+        $this->validateJavaScriptOptions($optionsRaw);
+        
         $this->set('optionsRaw', $optionsRaw);
 
         return $this;
+    }
+
+    /**
+     * Validates JavaScript options for common issues
+     * 
+     * @param string $options
+     * @throws \InvalidArgumentException
+     */
+    private function validateJavaScriptOptions(string $options)
+    {
+        $trimmed = trim($options);
+        
+        // Check if it starts and ends with braces
+        if (!str_starts_with($trimmed, '{') || !str_ends_with($trimmed, '}')) {
+            throw new \InvalidArgumentException('optionsRaw must be a valid JavaScript object (should start with { and end with })');
+        }
+        
+        // Check for common mistakes
+        if (str_contains($options, 'function(') && str_contains($options, '"function(')) {
+            throw new \InvalidArgumentException('JavaScript functions should not be quoted in optionsRaw');
+        }
+        
+        // Try to detect if it's meant to be JSON but contains functions
+        if (preg_match('/^\s*{\s*"/', $trimmed) && str_contains($options, 'function(')) {
+            // This looks like JSON syntax but contains functions - warn the user
+            // This is actually valid JavaScript, so we'll allow it but could add a warning in the future
+        }
     }
 
     /**
@@ -171,7 +201,7 @@ class Builder
 
         $optionsFallback = "{}";
 
-        $optionsSimple = $chart['options'] ? json_encode($chart['options'], true) : null;
+        $optionsSimple = $chart['options'] ? json_encode($chart['options'], JSON_THROW_ON_ERROR) : null;
 
         $options = $chart['optionsRaw'] ?? $optionsSimple ?? $optionsFallback;
 
