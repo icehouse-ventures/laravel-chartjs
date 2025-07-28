@@ -1,6 +1,6 @@
 # laravel-chartjs - A Chart.js wrapper for Laravel
 
-Simple package to facilitate and automate the use of charts in Laravel using the [Chart.js](http://www.chartjs.org/) library.
+Simple package to facilitate and automate the use of charts and graphs in Laravel using the [Chart.js](http://www.chartjs.org/) library.
 
 # Setup:
 This package provides a wrapper for Chartjs that allows it to be used simply and easily inside a Laravel application. The package supports a number of installation methods depending on your needs and familiarity with JavaScript.
@@ -51,6 +51,13 @@ In some rare circumstances, such as local development without an internet connec
 ## NPM (Best Practice)
 The recommended method to install Chartjs in a web application is to include it in your normal JavaScript and/or CSS bundle pipeline using NPM, Laravel Mix or Vite. For instructions on this method of installation please visit: https://www.chartjs.org/docs/latest/getting-started/ If you do not currently have a JavaScript package manager installed, the other delivery methods are helpful until you need one.
 
+## Custom
+If you leave the config as blank or 'custom', then the package will assume that the Chart JS JavaScript has been loaded manually. You can do this by adding a CDN to the header of your page such as:
+
+```
+<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+```
+
 # Usage:
 You can call the package Facade to easily load the service responsible for building the charts and then pass through a fluent Laravel-style interface to set your various chart settings.
 
@@ -60,13 +67,12 @@ use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 $chart = Chartjs::build()
     ->name()
     ->type()
-    ->size()
     ->labels()
     ->datasets()
     ->options();
 ```
 
-The builder needs the name of the chart, the type of chart (that can be anything that is supported by Chartjs) and the other custom configurations like labels, datasets, size and options.
+The builder needs the name of the chart, the type of chart (that can be anything that is supported by Chartjs) and the other custom configurations like labels, datasets and options.
 
 In the dataset interface you can pass any configuration and options to your chart. All options available in Chartjs documentation are supported. Just write the configuration with php array notations and it works!
 
