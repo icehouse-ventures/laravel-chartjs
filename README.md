@@ -91,9 +91,11 @@ $chart->options([
 
 # Advanced Chartjs options
 
-The basic options() method allows you to add simple key-value pair based options. Using the optionsRaw() method it's possible to add more complex nested Chartjs options in raw json format and to used nested calls to the options for plugins:
+The basic options() method allows you to add simple key-value pair based options. Using the optionsRaw() method it's possible to add more complex nested Chartjs options in raw JavaScript format and to use JavaScript functions for callbacks:
 
-Passing string format raw options to the chart like a json:
+## Basic Raw Options
+
+Passing string format raw options to the chart like a JavaScript object:
 ```php
 $chart->optionsRaw("{
         scales: {
@@ -118,6 +120,102 @@ $chart->optionsRaw("{
         }
     }");
 ```
+
+## Number Formatting with JavaScript Functions
+
+For advanced number formatting (like currency display), you can use JavaScript functions in your optionsRaw:
+
+```php
+$chart->optionsRaw('{
+    responsive: true,
+    plugins: {
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    let label = context.dataset.label || "";
+                    if (label) {
+                        label += ": ";
+                    }
+                    if (context.parsed.y !== null) {
+                        label += "R$ " + context.parsed.y.toLocaleString("pt-BR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+                    return label;
+                }
+            }
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                callback: function(value, index, values) {
+                    return "R$ " + value.toLocaleString("pt-BR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                }
+            }
+        }
+    }
+}');
+```
+
+For US dollar formatting:
+```php
+$chart->optionsRaw('{
+    responsive: true,
+    plugins: {
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    let label = context.dataset.label || "";
+                    if (label) {
+                        label += ": ";
+                    }
+                    if (context.parsed.y !== null) {
+                        label += "$" + context.parsed.y.toLocaleString("en-US", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                    }
+                    return label;
+                }
+            }
+        }
+    },
+    scales: {
+        y: {
+            ticks: {
+                callback: function(value, index, values) {
+                    return "$" + value.toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                }
+            }
+        }
+    }
+}');
+```
+
+## Troubleshooting optionsRaw
+
+If your number formatting isn't working:
+
+1. **Check JavaScript syntax**: Ensure your JavaScript object syntax is valid. You can use either quoted (`"responsive": true`) or unquoted (`responsive: true`) property names.
+
+2. **Verify function placement**: Callback functions should be placed in the correct Chart.js option paths:
+   - Tooltip formatting: `plugins.tooltip.callbacks.label`
+   - Axis tick formatting: `scales.y.ticks.callback` (or `scales.x.ticks.callback`)
+
+3. **Test with browser console**: Open your browser's developer console to check for JavaScript errors that might prevent the functions from executing.
+
+4. **Check Chart.js version compatibility**: Ensure your callback function syntax matches your Chart.js version. This package supports Chart.js v2, v3, and v4.
+
+5. **Validate locale support**: Make sure the locale you're using (like "pt-BR") is supported by the browser's `toLocaleString()` method.
 
 # Examples
 
