@@ -119,6 +119,38 @@ $chart->optionsRaw("{
     }");
 ```
 
+### Configuring Y-Axis Step Size (Chart.js v4)
+
+To configure step size for the Y-axis (useful for ensuring integer values), use the following configuration:
+
+```php
+$chart = Chartjs::build()
+    ->name('stepSizeChart')
+    ->type('bar')
+    ->labels(['A', 'B', 'C', 'D'])
+    ->datasets([
+        [
+            'label' => 'Data',
+            'data' => [2, 4, 1, 3],
+            'backgroundColor' => 'rgba(255, 193, 7, 0.8)',
+        ]
+    ])
+    ->options([
+        'scales' => [
+            'y' => [
+                'beginAtZero' => true,
+                'min' => 0,
+                'max' => 10,
+                'ticks' => [
+                    'stepSize' => 1,  // Forces integer steps
+                ],
+            ],
+        ],
+    ]);
+```
+
+**Note:** In Chart.js v4, the `beginAtZero` property should be placed inside the specific axis configuration (e.g., `y`), not at the root level of `scales`.
+
 # Examples
 
 1 - Line Chart:
