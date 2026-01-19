@@ -151,7 +151,7 @@ class Builder
     public function optionsRaw(string|array $optionsRaw)
     {
         if (is_array($optionsRaw)) {
-            $this->set('optionsRaw', json_encode($optionsRaw, true));
+            $this->set('optionsRaw', json_encode($optionsRaw));
             return $this;
         }
 
@@ -171,7 +171,7 @@ class Builder
 
         $optionsFallback = "{}";
 
-        $optionsSimple = $chart['options'] ? json_encode($chart['options'], true) : null;
+        $optionsSimple = $chart['options'] ? json_encode($chart['options']) : null;
 
         $options = $chart['optionsRaw'] ?? $optionsSimple ?? $optionsFallback;
 
