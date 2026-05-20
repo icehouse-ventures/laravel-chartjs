@@ -1,6 +1,6 @@
 # laravel-chartjs - A Chart.js wrapper for Laravel
 
-Simple package to facilitate and automate the use of charts and graphs in Laravel using the [Chart.js](http://www.chartjs.org/) library.
+Simple package to facilitate and automate the use of charts and graphs in Laravel using the [Chart.js](http://www.chartjs.org/) library. Supports Laravel 5.1 through 13.
 
 # Setup:
 This package provides a wrapper for Chartjs that allows it to be used simply and easily inside a Laravel application. The package supports a number of installation methods depending on your needs and familiarity with JavaScript.
