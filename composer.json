@@ -1,5 +1,5 @@
 {
-    "name": "rogermedico/laravel-chartjs",
+    "name": "icehouse-ventures/laravel-chartjs",
     "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.js library",
     "keywords": [
         "laravel",
