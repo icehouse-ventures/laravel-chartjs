@@ -1,7 +1,4 @@
-/.idea
-/vendor
-/node_modules
-/phpunit.xml
-.phpunit.result.cache
-.env
-.idea
+/.phpunit.cache/
+/composer.lock
+/node_modules/
+/vendor/

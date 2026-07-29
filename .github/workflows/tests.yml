@@ -1,0 +1,89 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.2'
+            laravel: 12
+            testbench: '^10.11'
+            pest: '^3.8'
+            pest-plugin-laravel: '^3.2'
+          - php: '8.3'
+            laravel: 13
+            testbench: '^11.1'
+            pest: '^4.7'
+            pest-plugin-laravel: '^4.1'
+          - php: '8.4'
+            laravel: 13
+            testbench: '^11.1'
+            pest: '^5.0'
+            pest-plugin-laravel: '^5.0'
+          - php: '8.5'
+            laravel: 13
+            testbench: '^11.1'
+            pest: '^5.0'
+            pest-plugin-laravel: '^5.0'
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - run: >-
+          composer update
+          --prefer-dist
+          --no-interaction
+          --no-progress
+          --with "orchestra/testbench:${{ matrix.testbench }}"
+          --with "pestphp/pest:${{ matrix.pest }}"
+          --with "pestphp/pest-plugin-laravel:${{ matrix.pest-plugin-laravel }}"
+
+      - run: composer test
+
+  quality:
+    name: Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+
+      - uses: ramsey/composer-install@v4
+
+      - run: composer lint
+      - run: composer analyse
+
+  assets:
+    name: Frontend assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: git diff --exit-code -- dist/chart.js dist/chart2.bundle.js dist/chart3.js

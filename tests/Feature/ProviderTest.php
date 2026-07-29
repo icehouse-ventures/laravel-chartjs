@@ -1,7 +1,6 @@
 <?php
 
 use IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider;
-use Illuminate\Support\Facades\File;
 
 it('registers the package provider', function () {
 
@@ -19,14 +18,18 @@ it('registers the package provider', function () {
 });
 
 it('publishes assets', function () {
-    // Install the service provider
-    $this->artisan('vendor:publish', [
-        '--provider' => ChartjsServiceProvider::class,
-        '--tag' => 'assets',
-    ]);
+    foreach ([
+        'assets' => 'chart.js',
+        'assets-v3' => 'chart3.js',
+        'assets-v2' => 'chart2.bundle.js',
+    ] as $tag => $file) {
+        $this->artisan('vendor:publish', [
+            '--provider' => ChartjsServiceProvider::class,
+            '--tag' => $tag,
+        ]);
 
-    // Assert that the assets have been published
-    $this->assertFileExists(public_path('vendor/laravelchartjs/chart.js'));
+        $this->assertFileExists(public_path('vendor/laravelchartjs/'.$file));
+    }
 });
 
 it('publishes configuration', function () {
@@ -45,8 +48,26 @@ it('publishes views', function () {
     $this->artisan('vendor:publish', [
         '--provider' => ChartjsServiceProvider::class,
         '--tag' => 'views',
+        '--force' => true,
     ]);
 
     // Assert that the views have been published
     $this->assertFileExists(resource_path('views/vendor/laravelchartjs/chart-template.blade.php'));
+    $this->assertFileExists(resource_path('views/vendor/laravelchartjs/chart-scripts.blade.php'));
+});
+
+it('loads major-pinned CDN assets and a compatible date adapter', function () {
+    config()->set('chartjs.delivery', 'cdn');
+    config()->set('chartjs.version', 4);
+    config()->set('chartjs.date_adapter', 'luxon');
+
+    $html = app('chartjs')
+        ->name('chart1')
+        ->render()
+        ->render();
+
+    expect($html)
+        ->toContain('chart.js@4/dist/chart.umd.min.js')
+        ->toContain('luxon@3/build/global/luxon.min.js')
+        ->toContain('chartjs-adapter-luxon@1');
 });

@@ -7,15 +7,14 @@ return [
     | Chartjs Version
     |--------------------------------------------------------------------------
     |
-    | We default to version 2 for easy transition from the existing
-    | Laravel Chartjs packages. Each version has breaking changes
-    | which are worth investigating before migrating.
+    | Version 4 is the current supported Chart.js major. Versions 2 and 3
+    | remain available to support migrations from older applications.
     |
     | Available choices are '2', '3' and '4'
     |
     */
 
-    'version' => 2,
+    'version' => 4,
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +43,7 @@ return [
     |
     | JavaScript packages like Chartjs often need an add-on time & date package
     | to enable them to parse, compare, and format dates (similar to how we
-    | use Carbon in Laravel. Chartjs works with the three most popular date
+    | use Carbon in Laravel). Chart.js works with the three most popular date
     | packages. To assist in migrating between packages, the CDN delivery
     | method allows you to swap between date packages. Make sure to check
     | the syntax of the callbacks you are using and the capitalisation
@@ -61,7 +60,7 @@ return [
     | Custom Chart Type Plugins
     |--------------------------------------------------------------------------
     |
-    | You can add plugins to Charjs for various custom chart types
+    | You can add plugins to Chart.js for various custom chart types
     | by adding the name of the chart type and the URL to the plugin.
     | This is useful for adding custom chart types to the package
     | without having to modify the package itself.

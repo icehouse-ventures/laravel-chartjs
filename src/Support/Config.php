@@ -4,29 +4,35 @@ namespace IcehouseVentures\LaravelChartjs\Support;
 
 class Config
 {
-    public static function allowedChartTypes()
+    /** @return list<string> */
+    public static function allowedChartTypes(): array
     {
         $base_types = ['bar', 'horizontalBar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
 
-        if (self::chartJsVersion() > 3) {
+        if (self::chartJsVersion() >= 3) {
             $base_types = ['bar', 'bubble', 'scatter', 'doughnut', 'line', 'pie', 'polarArea', 'radar'];
         }
 
-        return array_merge($base_types, array_keys(config('chartjs.custom_chart_types', [])));
+        $customTypes = array_map(
+            static fn (int|string $type): string => (string) $type,
+            array_keys((array) config('chartjs.custom_chart_types', []))
+        );
+
+        return [...$base_types, ...$customTypes];
     }
 
-    public static function chartJsVersion()
+    public static function chartJsVersion(): int
     {
-        return config('chartjs.version', 2);
+        return (int) config('chartjs.version', 4);
     }
 
-    public static function deliveryMethod()
+    public static function deliveryMethod(): string
     {
-        return strtolower(config('chartjs.delivery', 'cdn'));
+        return strtolower((string) config('chartjs.delivery', 'custom'));
     }
 
-    public static function dateAdapter()
+    public static function dateAdapter(): string
     {
-        return config('chartjs.date_adapter', 'none');
+        return strtolower((string) config('chartjs.date_adapter', 'none'));
     }
 }

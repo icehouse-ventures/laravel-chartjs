@@ -1,11 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\App;
+
 it('can create and load Laravel app', function () {
-    // Create the Laravel application
-    $app = new \Illuminate\Foundation\Application();
-
-    // Perform assertions to check if the app is loaded
-    expect($app)->toBeInstanceOf(\Illuminate\Foundation\Application::class);
-    expect(\Illuminate\Support\Facades\App::environment())->toBe('testing');
-
+    expect(app())->toBeInstanceOf(Application::class);
+    expect(App::environment())->toBe('testing');
 });

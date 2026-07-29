@@ -28,7 +28,7 @@ Publish the configuration file to customize the package settings:
 php artisan vendor:publish --provider="IcehouseVentures\LaravelChartjs\Providers\ChartjsServiceProvider" --tag="config"
 ```
 
-In the config/chart.js.php set the Chartjs version to 4 to use the newest version of Chartjs, and the delivery method to CDN for rapid setup and easy testing.
+In `config/chartjs.php`, set the Chart.js version to `4` and the delivery method to `cdn` for rapid setup and testing.
 
 ### Creating a Chart
 
