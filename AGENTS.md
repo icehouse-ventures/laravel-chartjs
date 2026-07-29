@@ -1,38 +1,62 @@
-# AGENTS.md for laravel-chartjs
+# Contributor guidance for laravel-chartjs
 
-## Persona
+## Project context
 
-You are a Senior Laravel Developer. Follow SOLID principles, favor composition over inheritance, and adhere to modern Laravel standards.
+- PHP 8.2+ package for Laravel applications.
+- The supported framework versions are Laravel 12 and 13.
+- Chart.js 4 is the default and security-supported browser runtime.
+- Chart.js 2 and 3 assets remain available for migration compatibility.
+- Both standard Blade and Livewire rendering paths are supported.
 
-## Context
+## Validation commands
 
-- Framework: Laravel 11+
-- Language: PHP 8.3+ (Strict Types)
-- Chart Library: Chart.js 4.x
+- Install PHP dependencies: `composer install`
+- Run the complete PHP check: `composer check`
+- Run tests only: `composer test`
+- Check formatting: `composer lint`
+- Run PHPStan: `composer analyse`
+- Install JavaScript dependencies: `npm ci`
+- Rebuild the Chart.js 4 distribution: `npm run build`
+- Check dependency advisories: `composer audit` and `npm audit`
 
-## Commands
+Run `composer check` after PHP, Blade, configuration, or test changes. Run
+`npm run build` after JavaScript dependency or source changes and commit the
+resulting `dist/chart.js` update.
 
-- Run Tests: `vendor/bin/phpunit`
-- Lint Code: `./vendor/bin/pint`
-- Static Analysis: `vendor/bin/phpstan analyse`
+## Implementation rules
 
-## Rules
+- Preserve PHP 8.2 compatibility and use native types plus precise PHPDoc where
+  PHP cannot express an array shape or generic type.
+- Keep normal and Livewire asset delivery aligned through
+  `chart-scripts.blade.php`.
+- Treat Chart.js configuration arrays as data. Encode them with the shared,
+  exception-throwing and HTML-safe JSON path in `Builder`.
+- Treat string values passed to `optionsRaw()` as trusted, application-authored
+  JavaScript. Never interpolate user input into them.
+- Keep CDN dependencies pinned to a supported major version so applications do
+  not receive an unexpected breaking browser dependency.
+- Do not edit `dist/chart.js` by hand; rebuild it from
+  `src/resources/js/chart.js`.
+- Do not remove or overwrite the Chart.js 2 or 3 distribution files during a
+  Chart.js 4 build.
+- Add or update tests for behavior changes, especially Blade output, JSON
+  encoding, publishable assets, and version-specific chart types.
 
-- Always use strict typing `declare(strict_types=1);` in all PHP files.
-- Use Class-based Blade components for chart rendering.
-- Ensure all chart options are configurable via the `config/chartjs.php` file.
-- Favor Constructor Injection over the `app()` helper.
-- Use Laravel's `Fluent` or `Data Transfer Objects (DTOs)` for complex chart configurations.
+## Dependency and compatibility changes
 
-## Boundaries & Security
+- Update `composer.lock` or `package-lock.json` when their manifests change.
+- Do not disable Composer security-advisory blocking to make an unsupported
+  framework lane install.
+- Add compatibility lanes deliberately and test the lowest supported PHP and
+  framework combination.
+- Changes to the PHP floor, default Chart.js major, generated browser assets, or
+  public builder behavior require explicit release notes and may require a major
+  release.
 
-- Do not modify `composer.lock` unless specifically asked to update dependencies.
-- Never commit `.env` or sensitive keys.
-- Never hardcode API keys or credentials; use `config()` (preferred) or `env()`.
-- Do not add new composer dependencies without explicit permission.
+## Documentation and security
 
-## Documentation
-
-- Adequately comment throughout the code ONLY where necessary.
-- Comments must be concise, specific, and value-dense.
-- Use PHPDoc blocks for complex return types that PHP cannot natively hint.
+- Use the “Chart.js” name in prose.
+- Prefer concise comments that explain a non-obvious constraint.
+- Never add secrets, credentials, `.env` files, or application-specific data.
+- Document migration-only support separately from actively tested and
+  security-supported versions.

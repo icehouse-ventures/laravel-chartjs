@@ -16,8 +16,11 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/support": "^5.1|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+        "php": "^8.2",
+        "illuminate/support": "^12.0|^13.0"
+    },
+    "suggest": {
+        "livewire/livewire": "Required for reactive chart components; release-tested with Livewire 4."
     },
     "autoload": {
         "psr-4": {
@@ -40,17 +43,28 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^8.19|^10.0|^11.0",
-        "pestphp/pest": "^2.30|^3.7|^4.0",
-        "laravel/pint": "^1.13",
-        "phpstan/phpstan": "^1.10|^2.1",
-        "pestphp/pest-plugin-laravel": "^2.2|^3.1|^4.1"
+        "laravel/pint": "^1.30",
+        "orchestra/testbench": "^10.11|^11.1",
+        "pestphp/pest": "^3.8|^4.7|^5.0",
+        "pestphp/pest-plugin-laravel": "^3.2|^4.1|^5.0",
+        "phpstan/phpstan": "^2.2"
+    },
+    "scripts": {
+        "analyse": "phpstan analyse src --level=8 --no-progress",
+        "check": [
+            "@lint",
+            "@analyse",
+            "@test"
+        ],
+        "format": "pint",
+        "lint": "pint --test",
+        "test": "pest tests"
     },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "sort-packages": true
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }
